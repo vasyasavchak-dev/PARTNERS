@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Partners</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#1F3D33">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Partners">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+<style>
+  html, body { margin:0; padding:0; height:100%; background:#1F3D33; overflow:hidden; }
+  #app {
+    position:fixed; inset:0; width:100%; height:100%; border:0; background:#F7F7F5;
+    padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom);
+    box-sizing:border-box;
+  }
+  #boot {
+    position:fixed; inset:0; display:flex; flex-direction:column; gap:14px;
+    align-items:center; justify-content:center; background:#1F3D33; color:#EDEAE2;
+    font:400 15px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; text-align:center; padding:24px;
+  }
+  #boot .nm { font-size:22px; letter-spacing:0.08em; font-weight:600; }
+  #boot .sp {
+    width:26px; height:26px; border:2px solid rgba(255,255,255,0.25);
+    border-top-color:#EDEAE2; border-radius:50%; animation:spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  #boot a {
+    display:none; color:#1F3D33; background:#EDEAE2; text-decoration:none;
+    padding:10px 18px; border-radius:100px; font-weight:500;
+  }
+  #boot.slow a { display:inline-block; }
+  #boot.slow .hint { display:block; }
+  .hint { display:none; font-size:13px; color:rgba(237,234,226,0.7); max-width:300px; }
+</style>
+</head>
+<body>
+
+<!-- ───────── Адреса вашої CRM ─────────
+     Це посилання «Ввести в дію → Керувати розгортаннями» в Apps Script.
+     Міняти тут треба лише тоді, коли ви створили НОВЕ розгортання.
+     Звичайне оновлення («Нова версія») адресу не змінює.          -->
+<script>
+  var CRM_URL = "https://script.google.com/macros/s/AKfycbxm-gH_LH8ZxEE9fjfqsiE52_qKq1RZIYTzMBohSWkYu-cPbZqmRV_7n7Z2YM3zipwHrQ/exec";
+</script>
+
+<div id="boot">
+  <div class="nm">PARTNERS</div>
+  <div class="sp"></div>
+  <a id="open" target="_blank" rel="noopener">Відкрити у браузері</a>
+  <div class="hint">Якщо вікно не завантажується, відкрийте CRM у браузері.</div>
+</div>
+
+<iframe id="app" title="Partners" allow="clipboard-read; clipboard-write; fullscreen"></iframe>
+
+<script>
+  var boot = document.getElementById('boot');
+  var app  = document.getElementById('app');
+  document.getElementById('open').href = CRM_URL;
+
+  app.addEventListener('load', function () { boot.style.display = 'none'; });
+  setTimeout(function () { boot.classList.add('slow'); }, 9000);
+
+  app.src = CRM_URL;
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+    });
+  }
+</script>
+</body>
+</html>
