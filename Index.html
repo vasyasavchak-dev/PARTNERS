@@ -1,0 +1,3109 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partners</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#ffffff;--bg2:#f7f7f5;--bg3:#f0efe9;
+  --text:#1a1a1a;--text2:#6b6b6b;--text3:#a0a09a;
+  --border:rgba(0,0,0,0.12);--border2:rgba(0,0,0,0.2);
+  --success-bg:#EAF3DE;--success-text:#3B6D11;
+  --danger-bg:#FAECE7;--danger-text:#993C1D;
+  --info-bg:#E6F1FB;--info-text:#185FA5;
+  --warn-bg:#FAEEDA;--warn-text:#854F0B;
+  --purple-bg:#EEEDFE;--purple-text:#3C3489;
+  --radius:8px;--radius-lg:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;color:var(--text);background:var(--bg3);min-height:100vh;}
+.app{max-width:1180px;margin:0 auto;padding:1.25rem 1.5rem;}
+.hide{display:none !important;}
+
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1rem;}
+.login-box{background:var(--bg);border-radius:var(--radius-lg);border:0.5px solid var(--border);padding:2rem;width:min(380px,100%);}
+.login-logo{text-align:center;margin-bottom:1.5rem;}
+.login-logo .mark{font-size:24px;font-weight:500;letter-spacing:0.06em;}
+.login-logo .sub{font-size:12px;color:var(--text2);margin-top:4px;}
+.pw-wrap{position:relative;}
+.pw-wrap input{padding-right:40px;}
+.pw-wrap input{padding-right:84px;}
+.pw-eye{position:absolute;right:5px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;color:var(--text2);font-size:12px;padding:5px 8px;border-radius:var(--radius);font-family:inherit;}
+.pw-eye:hover{color:var(--text);background:var(--bg2);}
+.lang-sw{display:flex;gap:4px;justify-content:center;margin-top:1rem;}
+.lang-sw button{padding:3px 11px;border:0.5px solid var(--border);border-radius:100px;background:var(--bg);font-size:11px;cursor:pointer;color:var(--text2);}
+.lang-sw button.on{background:var(--text);color:var(--bg);border-color:transparent;}
+
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:10px;}
+.logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:500;letter-spacing:0.05em;}
+.logo i{font-size:22px;}
+.who{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2);}
+.admin-pill{padding:2px 9px;border-radius:100px;background:var(--purple-bg);color:var(--purple-text);font-size:11px;font-weight:500;}
+
+.tabs{display:flex;gap:0;margin-bottom:1.25rem;border-bottom:0.5px solid var(--border);flex-wrap:wrap;}
+.tab{padding:8px 18px;cursor:pointer;border:none;background:none;font-size:14px;color:var(--text2);border-bottom:2px solid transparent;margin-bottom:-1px;}
+.tab.active{color:var(--text);border-bottom-color:var(--text);font-weight:500;}
+.page{display:none;}
+.page.active{display:block;}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.25rem;}
+.stat{background:var(--bg);border-radius:var(--radius);padding:12px 14px;border:0.5px solid var(--border);}
+.stat-label{font-size:12px;color:var(--text2);margin-bottom:4px;}
+.stat-val{font-size:24px;font-weight:500;}
+
+.top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:8px;flex-wrap:wrap;}
+.filter-bar{display:flex;gap:6px;flex-wrap:wrap;}
+.chip{padding:4px 12px;border:0.5px solid var(--border);border-radius:100px;font-size:12px;cursor:pointer;background:var(--bg);color:var(--text2);}
+.chip.active{background:var(--text);color:var(--bg);border-color:transparent;}
+.search{padding:7px 12px;border:0.5px solid var(--border);border-radius:var(--radius);font-size:13px;width:180px;background:var(--bg);color:var(--text);}
+.sel{padding:7px 10px;border:0.5px solid var(--border);border-radius:var(--radius);font-size:13px;background:var(--bg);color:var(--text);}
+
+.btn{padding:7px 14px;border:0.5px solid var(--border2);border-radius:var(--radius);background:var(--bg);font-size:13px;cursor:pointer;color:var(--text);display:inline-flex;align-items:center;gap:6px;}
+.btn:hover{background:var(--bg2);}
+.btn.primary{background:var(--text);color:var(--bg);border-color:transparent;}
+.btn.primary:hover{opacity:0.85;}
+.btn.danger{color:var(--danger-text);border-color:var(--danger-text);}
+.btn.danger:hover{background:var(--danger-bg);}
+.btn.sm{padding:4px 10px;font-size:12px;}
+.btn:disabled{opacity:0.5;cursor:default;}
+.icon-btn{width:28px;height:28px;border:0.5px solid var(--border);border-radius:var(--radius);background:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;color:var(--text2);}
+.icon-btn:hover{background:var(--bg2);color:var(--text);}
+
+.card{background:var(--bg);border-radius:var(--radius-lg);border:0.5px solid var(--border);overflow:hidden;}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table{min-width:100%;}
+/* Кнопки дій завжди видно, навіть коли таблиця ширша за екран */
+#orders-head th:last-child,
+#orders-body td:last-child{position:sticky;right:0;z-index:2;
+  box-shadow:-7px 0 9px -9px rgba(0,0,0,0.35);}
+#orders-head th:last-child{background:var(--bg2);}
+#orders-body td:last-child{background:var(--bg);}
+
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{text-align:left;padding:9px 12px;color:var(--text2);font-weight:400;border-bottom:0.5px solid var(--border);white-space:nowrap;background:var(--bg2);}
+td{padding:9px 12px;border-bottom:0.5px solid var(--border);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tbody tr:hover td{background:var(--bg2);}
+
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:100px;font-size:11px;font-weight:500;white-space:nowrap;}
+.badge.paid{background:var(--success-bg);color:var(--success-text);}
+.badge.unpaid{background:var(--danger-bg);color:var(--danger-text);}
+.badge.shipped{background:var(--info-bg);color:var(--info-text);}
+.badge.pending{background:var(--warn-bg);color:var(--warn-text);}
+.badge.new{background:var(--purple-bg);color:var(--purple-text);}
+.badge.off{background:var(--bg3);color:var(--text2);}
+
+.dot{display:inline-block;width:13px;height:13px;border-radius:50%;border:0.5px solid var(--border2);vertical-align:-2px;margin-right:5px;flex-shrink:0;}
+.dot.lg{width:17px;height:17px;}
+.itemcell{min-width:170px;max-width:290px;}
+#orders-head th,#orders-body td{padding:7px 8px;font-size:12.5px;}
+#orders-body .buyer{max-width:165px;}
+#orders-body .buyer .addr{font-size:10.5px;color:var(--text3);margin-top:2px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.hidmark{display:inline-flex;align-items:center;gap:3px;margin-top:3px;font-size:10px;
+  color:var(--warn-text);cursor:help;}
+#orders-body .badge{font-size:10.5px;padding:2px 7px;}
+#orders-body .mono{font-size:11.5px;}
+#orders-body .icon-btn{padding:3px 5px;}
+.tapbadge{cursor:pointer;display:inline-block;}
+#ver-bar{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:9999;
+  display:flex;gap:12px;align-items:center;background:#2B2B29;color:#fff;
+  padding:10px 14px;border-radius:100px;font-size:13px;
+  box-shadow:0 6px 22px rgba(0,0,0,0.25);max-width:92vw;}
+#ver-bar .btn{background:#fff;border-color:#fff;color:#2B2B29;white-space:nowrap;}
+.chatpick{flex:1 0 100%;margin-top:6px;border:0.5px solid var(--border2);border-radius:var(--radius);
+  background:var(--bg);overflow:hidden;}
+.chatpick .cp-head{font-size:11px;color:var(--text3);padding:6px 9px;background:var(--bg2);}
+.chatpick .cp-row{display:flex;justify-content:space-between;gap:10px;align-items:center;
+  padding:7px 9px;font-size:12px;cursor:pointer;border-top:0.5px solid var(--border);}
+.chatpick .cp-row:hover{background:var(--bg2);}
+.chatpick .cp-row .mono{color:var(--text3);font-size:11px;}
+.tapbadge:hover{filter:brightness(0.95);}
+#orders-body .btn{font-size:11px;padding:4px 9px;}
+.icell{display:flex;gap:9px;align-items:center;}
+.iname{line-height:1.35;min-width:0;}
+.opic{flex:0 0 auto;width:52px;height:40px;object-fit:contain;
+  border-radius:7px;border:0.5px solid var(--border);background:var(--bg2);display:block;}
+.opic.zoom{cursor:zoom-in;}
+.opic.zoom:hover{border-color:var(--accent);}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;}
+.swatch{border:1.5px solid var(--border);border-radius:var(--radius);padding:7px;cursor:pointer;background:var(--bg);text-align:center;transition:border-color 0.12s;}
+.swatch:hover{border-color:var(--border2);}
+.swatch.on{border-color:var(--text);}
+.swatch .chipc{width:100%;height:34px;border-radius:5px;border:0.5px solid var(--border);margin-bottom:5px;}
+.swatch .nm{font-size:11px;line-height:1.25;}
+.swatch .fin{font-size:10px;color:var(--text3);}
+
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;align-items:center;justify-content:center;padding:1rem;}
+.modal-bg.open{display:flex;}
+.modal{background:var(--bg);border-radius:var(--radius-lg);border:0.5px solid var(--border);padding:1.5rem;width:min(600px,100%);max-height:90vh;overflow-y:auto;}
+.modal h2{font-size:16px;font-weight:500;margin-bottom:1.25rem;display:flex;align-items:center;gap:8px;}
+.field{margin-bottom:1rem;}
+.field label{display:block;font-size:12px;color:var(--text2);margin-bottom:5px;}
+.field input,.field select,.field textarea{width:100%;padding:8px 10px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:13px;background:var(--bg);color:var(--text);}
+.field textarea{min-height:64px;resize:vertical;}
+.row{display:flex;gap:10px;flex-wrap:wrap;}
+.row .field{flex:1;min-width:130px;}
+.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:1.25rem;padding-top:1rem;border-top:0.5px solid var(--border);}
+.sect{font-size:12px;color:var(--text2);font-weight:500;margin:1.25rem 0 0.6rem;padding-top:0.9rem;border-top:0.5px solid var(--border);}
+
+.vrow{display:flex;gap:6px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
+.vrow input,.vrow select{padding:6px 8px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:12px;background:var(--bg);color:var(--text);min-width:0;}
+
+/* Видимість по партнерах */
+.vis-list{display:flex;flex-direction:column;gap:6px;}
+.vis-item{display:flex;align-items:center;gap:9px;padding:7px 10px;border:0.5px solid var(--border);border-radius:var(--radius);cursor:pointer;background:var(--bg);}
+.vis-item:hover{background:var(--bg2);}
+.vis-item input{width:auto;margin:0;}
+.vis-item .nm{flex:1;font-size:13px;}
+.vis-item .nm small{display:block;color:var(--text3);font-size:11px;}
+.vis-item.off{opacity:0.55;}
+
+.checks{display:flex;gap:14px;flex-wrap:wrap;}
+.checks label{display:flex;align-items:center;gap:5px;font-size:13px;cursor:pointer;}
+.checks input{width:auto;}
+
+.file-zone{border:0.5px dashed var(--border2);border-radius:var(--radius);padding:16px;text-align:center;cursor:pointer;font-size:13px;color:var(--text2);}
+.file-zone:hover{background:var(--bg2);}
+.attachment{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg2);border-radius:var(--radius);font-size:12px;margin-top:6px;}
+.empty{text-align:center;padding:3rem;color:var(--text3);}
+.comment{display:flex;gap:8px;padding:8px 10px;background:var(--bg2);border-radius:var(--radius);font-size:12px;margin-top:6px;}
+.comment-author{font-weight:500;white-space:nowrap;}
+.comment-text{flex:1;}
+.comment-time{font-size:11px;color:var(--text3);white-space:nowrap;}
+
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--border2);border-top-color:var(--text);border-radius:50%;animation:spin 0.6s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;padding:10px 16px;border-radius:var(--radius);font-size:13px;z-index:999;animation:fadeIn 0.2s ease;max-width:min(380px,90vw);}
+.toast.success{background:var(--success-bg);color:var(--success-text);border:0.5px solid var(--success-text);}
+.toast.error{background:var(--danger-bg);color:var(--danger-text);border:0.5px solid var(--danger-text);}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;}
+.sync-bar{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);margin-bottom:10px;flex-wrap:wrap;}
+.fx-bar{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:100px;background:var(--bg);border:0.5px solid var(--border);font-size:11px;white-space:nowrap;}
+.fx-bar b{font-weight:500;color:var(--text);}
+.fx-bar .sep{color:var(--text3);}
+
+/* Категорії — горизонтальні чипси */
+.cat-bar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:1rem;}
+.cat-item{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;
+  border:0.5px solid var(--border);background:var(--bg);border-radius:100px;
+  cursor:pointer;font-size:13px;color:var(--text2);font-family:inherit;}
+.cat-item:hover{background:var(--bg2);color:var(--text);border-color:var(--border2);}
+.cat-item.on{background:var(--accent);color:#fff;border-color:transparent;}
+.cat-item .n{font-size:11px;opacity:0.7;font-variant-numeric:tabular-nums;}
+.plogo{width:26px;height:26px;border-radius:50%;object-fit:cover;border:0.5px solid var(--border);background:var(--bg2);flex-shrink:0;}
+.plogo.sm{width:20px;height:20px;}
+.plogo.lg{width:44px;height:44px;}
+.logo-pick{display:flex;align-items:center;gap:12px;}
+.logo-pick .hint{font-size:11px;color:var(--text3);}
+
+/* ══════════ НОВА ТЕМА ТА БІЧНЕ МЕНЮ ══════════ */
+:root{
+  --bg:#ffffff;--bg2:#f4f6f5;--bg3:#e9edeb;
+  --text:#16201c;--text2:#5c6b64;--text3:#93a29b;
+  --border:rgba(22,32,28,0.12);--border2:rgba(22,32,28,0.22);
+  --success-bg:#e3f0e4;--success-text:#2f6b35;
+  --danger-bg:#fbe9e7;--danger-text:#a03d26;
+  --info-bg:#e6eff7;--info-text:#1e5a8a;
+  --warn-bg:#fbf0dc;--warn-text:#8a5a12;
+  --purple-bg:#eaedfb;--purple-text:#3b3f8f;
+  --accent:#2f6f4e;--accent-2:#245a3f;
+  --side-bg:#16251d;--side-text:#c6d4cc;--side-hover:#20362a;
+}
+body{background:var(--bg3);}
+.shell{display:flex;min-height:100vh;}
+.side{width:216px;flex-shrink:0;background:var(--side-bg);color:var(--side-text);
+  display:flex;flex-direction:column;padding:1.1rem 0.75rem;position:sticky;top:0;height:100vh;}
+.side-logo{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:600;
+  letter-spacing:0.08em;color:#fff;padding:4px 10px 1.2rem;}
+.side-nav{display:flex;flex-direction:column;gap:2px;flex:1;}
+.side .tab{display:flex;align-items:center;gap:9px;width:100%;padding:9px 12px;
+  border-radius:var(--radius);font-size:14px;color:var(--side-text);border:none;background:none;
+  text-align:left;margin:0;cursor:pointer;font-family:inherit;}
+.side .tab:hover{background:var(--side-hover);color:#fff;}
+.side .tab.active{background:var(--accent);color:#fff;font-weight:500;}
+.side-foot{border-top:1px solid rgba(255,255,255,0.1);padding-top:0.8rem;margin-top:0.8rem;}
+.side-who{display:flex;align-items:center;gap:8px;padding:0 4px 9px;font-size:13px;color:#fff;}
+.side-who .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.3;}
+.side-who .nm small{display:block;font-size:11px;color:var(--side-text);font-weight:400;}
+.side-acts{display:flex;gap:6px;}
+.side-acts .icon-btn{border-color:rgba(255,255,255,0.18);color:var(--side-text);flex:1;}
+.side-acts .icon-btn:hover{background:var(--side-hover);color:#fff;}
+.main{flex:1;min-width:0;padding:1.25rem 1.6rem 2.5rem;max-width:none;}
+.tabs{border:none;margin:0;}
+.admin-pill{background:rgba(255,255,255,0.15);color:#fff;}
+
+.btn.primary{background:var(--accent);border-color:transparent;color:#fff;}
+.btn.primary:hover{background:var(--accent-2);opacity:1;}
+.chip.active{background:var(--accent);color:#fff;}
+.cat-item.on{background:var(--accent);color:#fff;}
+.swatch.on{border-color:var(--accent);}
+.lang-sw button.on{background:var(--accent);border-color:transparent;color:#fff;}
+.role-pill{background:var(--accent-soft,#e4efe9);color:var(--accent);}
+
+/* код країни замість емодзі-прапорця (Windows їх не малює) */
+/* Картки товарів */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px;}
+.pcard{position:relative;background:var(--bg);border:0.5px solid var(--border);
+  border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;
+  transition:box-shadow .14s,border-color .14s;}
+.pcard:hover{box-shadow:0 3px 14px rgba(22,32,28,0.09);border-color:var(--border2);}
+.pphoto{position:relative;aspect-ratio:4/3;flex:none;min-height:0;overflow:hidden;
+  background:var(--bg2);display:flex;align-items:center;
+  justify-content:center;color:var(--text3);font-size:11px;}
+.pphoto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  cursor:zoom-in;display:block;}
+.pbody{padding:12px 13px 14px;display:flex;flex-direction:column;gap:5px;flex:1;}
+mark{background:#ffe9a8;color:inherit;border-radius:3px;padding:0 2px;}
+.pskus{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px;}
+.pskus .sk{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;
+  background:var(--bg2);border:0.5px solid var(--border);border-radius:4px;padding:1px 6px;color:var(--text2);}
+.pcat{font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--text3);}
+.pname{font-size:14px;font-weight:500;line-height:1.3;}
+.psku{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:var(--text2);}
+.phid{font-size:10px;color:var(--warn-text);background:var(--warn-bg);
+  border-radius:var(--radius);padding:3px 7px;line-height:1.35;}
+.pvars{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px;}
+.pv{display:inline-flex;align-items:center;gap:5px;font-size:11px;background:var(--bg2);
+  border:0.5px solid var(--border);border-radius:100px;padding:2px 8px;color:var(--text2);}
+.pv .dot{width:10px;height:10px;margin:0;}
+.pv.count{background:none;border-color:var(--border2);color:var(--text);font-weight:500;}
+.pprice{margin-top:auto;padding-top:9px;font-size:14px;}
+.pacts{position:absolute;top:8px;right:8px;display:flex;gap:4px;opacity:0;transition:opacity .14s;}
+.pcard:hover .pacts{opacity:1;}
+.pacts .icon-btn{background:rgba(255,255,255,0.94);border-color:var(--border);}
+@media (hover:none){.pacts{opacity:1;}}
+
+/* Масовий вибір замовлень */
+.selbar{display:none;align-items:center;gap:10px;background:var(--side-bg);color:#fff;
+  border-radius:var(--radius-lg);padding:9px 14px;margin-bottom:0.9rem;flex-wrap:wrap;}
+.selbar.on{display:flex;}
+.selbar .n{font-size:13px;font-weight:500;}
+.selbar .btn{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.22);color:#fff;}
+.selbar .btn:hover{background:rgba(255,255,255,0.2);}
+td.selcell,th.selcell{width:34px;padding-left:14px;padding-right:0;}
+tr.rowsel td{background:var(--accent-soft,#e4efe9) !important;}
+
+/* Вкладки в картці товару */
+.ptabs{display:flex;gap:4px;margin:-0.4rem 0 1.1rem;border-bottom:0.5px solid var(--border);}
+.ptab{padding:7px 14px;border:none;background:none;cursor:pointer;font-size:13px;
+  color:var(--text2);border-bottom:2px solid transparent;margin-bottom:-1px;font-family:inherit;}
+.ptab:hover{color:var(--text);}
+.ptab.active{color:var(--text);border-bottom-color:var(--accent);font-weight:500;}
+.pbadge{display:none;margin-left:6px;font-size:10px;font-weight:600;background:var(--bg3);
+  color:var(--text2);border-radius:100px;padding:1px 7px;vertical-align:1px;}
+.pbadge.on{display:inline-block;}
+.ptab.active .pbadge{background:var(--accent);color:#fff;}
+
+/* Групи опцій */
+.ogroup{border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:11px;
+  margin-bottom:10px;background:var(--bg2);}
+.ohead{display:flex;gap:7px;align-items:center;margin-bottom:9px;}
+.ohead input{flex:1;padding:6px 10px;font-size:13px;border:0.5px solid var(--border2);
+  border-radius:var(--radius);background:var(--bg);color:var(--text);}
+.ohead select{width:104px;padding:6px 8px;font-size:12px;border:0.5px solid var(--border2);
+  border-radius:var(--radius);background:var(--bg);color:var(--text);}
+.greq{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text2);
+  white-space:nowrap;cursor:pointer;user-select:none;}
+.greq input[type=checkbox]{flex:0 0 auto;width:14px;height:14px;padding:0;margin:0;
+  border-radius:3px;accent-color:var(--accent);cursor:pointer;}
+.opick label .opt{font-weight:400;font-size:11px;color:var(--text3);}
+.opick label .gpx{font-weight:500;color:var(--text);}
+.swatch.none .chipc{background:repeating-linear-gradient(45deg,var(--bg2) 0 6px,var(--bg) 6px 12px);
+  display:flex;align-items:center;justify-content:center;}
+.swatch.none .chipc::after{content:'—';color:var(--text3);font-size:15px;}
+.ochoice{display:flex;gap:6px;align-items:center;flex-wrap:wrap;background:var(--bg);
+  border:0.5px solid var(--border);border-radius:var(--radius);padding:7px;margin-bottom:6px;}
+.ochoice input,.ochoice select{padding:5px 8px;font-size:12px;border:0.5px solid var(--border2);
+  border-radius:var(--radius);background:var(--bg);color:var(--text);min-width:0;}
+.oimgs{display:flex;gap:5px;align-items:center;flex-wrap:wrap;width:100%;margin-top:3px;}
+.oimg{position:relative;width:54px;}
+.oimg .pic{width:54px;height:42px;border-radius:5px;border:0.5px solid var(--border);
+  background:var(--bg2) center/contain no-repeat;display:block;}
+.oimg .cap{width:54px;font-size:9px;text-align:center;border:none;background:none;
+  color:var(--text2);padding:2px 0;}
+.oimg .rm{position:absolute;top:-5px;right:-5px;width:16px;height:16px;border-radius:50%;
+  border:none;background:var(--danger-text);color:#fff;font-size:10px;line-height:1;cursor:pointer;}
+.oadd{width:54px;height:42px;border:0.5px dashed var(--border2);border-radius:5px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text3);font-size:16px;}
+.oadd:hover{border-color:var(--accent);color:var(--accent);}
+
+/* Вибір опцій у замовленні */
+.psearch{margin-bottom:6px;}
+.pfound{font-size:11px;color:var(--text3);margin:-2px 0 5px;}
+.pfound.none{color:var(--danger-text);}
+.opick{margin-bottom:0.9rem;}
+.opick > label{display:block;font-size:12px;color:var(--text2);margin-bottom:5px;}
+.ogal{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px;}
+.ogal .g{width:76px;}
+.ogal .g .pic{width:76px;height:58px;border-radius:6px;border:0.5px solid var(--border);
+  background:var(--bg2) center/contain no-repeat;cursor:zoom-in;display:block;}
+.ogal .g .cap{font-size:10px;color:var(--text3);text-align:center;margin-top:2px;}
+
+.vbox{border:0.5px solid var(--border);border-radius:var(--radius);padding:8px;margin-bottom:8px;background:var(--bg2);}
+.vbox .vrow{margin-bottom:0;}
+.vattrs{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin-top:7px;padding-top:7px;
+  border-top:0.5px dashed var(--border);}
+.achip{display:inline-flex;align-items:center;gap:5px;font-size:11px;background:var(--bg);
+  border:0.5px solid var(--border);border-radius:100px;padding:3px 5px 3px 9px;color:var(--text2);}
+.achip b{font-weight:500;color:var(--text);}
+.achip button{border:none;background:none;cursor:pointer;color:var(--text3);
+  font-size:13px;line-height:1;padding:0 2px;}
+.achip button:hover{color:var(--danger-text);}
+.attr-add{display:inline-flex;gap:4px;align-items:center;}
+.attr-add input{padding:3px 7px;font-size:11px;border:0.5px solid var(--border2);
+  border-radius:100px;background:var(--bg);color:var(--text);width:108px;}
+.btn.xs{padding:3px 9px;font-size:11px;border-radius:100px;}
+.cimg{width:40px;height:40px;border-radius:var(--radius);border:0.5px solid var(--border2);
+  background:var(--bg2) center/cover no-repeat;cursor:pointer;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:15px;}
+.cimg:hover{border-color:var(--accent);}
+.photo-pick{display:flex;align-items:center;gap:12px;}
+.photo-prev{width:88px;height:88px;border-radius:var(--radius);object-fit:cover;
+  border:0.5px solid var(--border);background:var(--bg2);flex-shrink:0;}
+.photo-prev.empty{display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:11px;}
+.thumb{width:44px;height:44px;border-radius:6px;object-fit:cover;border:0.5px solid var(--border);background:var(--bg2);}
+img.thumb{cursor:zoom-in;}
+.photo-big{max-width:100%;max-height:70vh;border-radius:var(--radius);display:block;margin:0 auto;}
+.cc{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.04em;
+  background:var(--bg2);border:0.5px solid var(--border);border-radius:4px;
+  padding:1px 5px;color:var(--text2);vertical-align:1px;}
+
+@media (max-width:860px){
+  .shell{flex-direction:column;}
+  .side{width:100%;height:auto;position:static;padding:0.8rem;}
+  .side-nav{flex-direction:row;flex-wrap:wrap;}
+  .side .tab{width:auto;}
+  .side-foot{display:flex;align-items:center;gap:10px;}
+  .side-who{padding:0;flex:1;}
+  .main{padding:1rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ════ LOGIN ════ -->
+<div class="login-wrap" id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="mark">PARTNERS</div>
+      <div class="sub" id="l-sub"></div>
+    </div>
+    <div class="field"><label id="l-login-lb"></label><input id="l-login" autocomplete="username" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <div class="field"><label id="l-pass-lb"></label>
+      <div class="pw-wrap">
+        <input id="l-pass" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+        <button type="button" class="pw-eye" id="l-eye" onclick="togglePw()"></button>
+      </div>
+    </div>
+    <div id="l-err" style="font-size:12px;color:var(--danger-text);margin-bottom:10px;min-height:16px;"></div>
+    <button class="btn primary" style="width:100%;justify-content:center;" onclick="doLogin()" id="l-btn"></button>
+    <div class="lang-sw">
+      <button id="lang-uk" onclick="setLangLocal('uk')">Українська</button>
+      <button id="lang-en" onclick="setLangLocal('en')">English</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ APP ════ -->
+<div class="shell hide" id="app-screen">
+  <aside class="side">
+    <div class="side-logo">PARTNERS<small id="ui-ver" style="display:block;font-size:9px;opacity:0.45;letter-spacing:0.04em;font-weight:400;"></small></div>
+    <nav class="side-nav tabs" id="tabs"></nav>
+    <div class="side-foot">
+      <div class="side-who">
+        <img id="me-logo" class="plogo hide" alt="">
+        <span class="nm"><span id="me-name"></span><small><span class="admin-pill hide" id="me-admin"></span></small></span>
+      </div>
+      <div class="side-acts">
+        <button class="icon-btn" onclick="openProfile()" id="btn-profile"><i class="ti ti-user-cog"></i></button>
+        <button class="icon-btn" onclick="doLogout()" id="btn-logout"><i class="ti ti-logout"></i></button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+  <div class="sync-bar">
+    <span id="sync-status"></span>
+    <button class="btn sm" onclick="loadAll()" id="btn-refresh"></button>
+    <span class="fx-bar hide" id="fx-bar"></span>
+    <span id="last-sync" style="margin-left:auto;"></span>
+  </div>
+
+  <!-- ORDERS -->
+  <div class="page active" id="tab-orders">
+    <div class="stats" id="stats-bar"></div>
+    <div class="top-bar">
+      <div class="filter-bar" id="filter-bar"></div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <select class="sel" id="month-sel" onchange="setMonth(this.value)"></select>
+        <select class="sel hide" id="partner-sel" onchange="setPartner(this.value)"></select>
+        <input class="search" id="search" oninput="renderOrders()">
+        <button class="btn primary" onclick="openOrder()" id="add-order-btn"></button>
+      </div>
+    </div>
+    <div id="sum-line" style="font-size:12px;color:var(--text2);margin:-4px 0 10px;"></div>
+    <div class="selbar" id="sel-bar">
+      <span class="n" id="sel-n"></span>
+      <button class="btn sm" onclick="openBulkVis()"><i class="ti ti-eye-off"></i> <span id="sel-vis"></span></button>
+      <button class="btn sm" onclick="selClear()"><i class="ti ti-x"></i> <span id="sel-clear"></span></button>
+    </div>
+    <div class="card"><div class="table-wrap">
+      <table><thead id="orders-head"></thead><tbody id="orders-body"></tbody></table>
+      <div class="empty hide" id="orders-empty"></div>
+    </div></div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="page" id="tab-products">
+    <div class="top-bar">
+      <div style="display:flex;gap:10px;align-items:center;">
+        <input class="search" id="p-search" oninput="renderProducts()">
+        <span id="p-count" style="font-size:13px;color:var(--text2);white-space:nowrap;"></span>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn" onclick="openColors()" id="colors-btn"></button>
+        <button class="btn primary" onclick="openProduct()" id="add-product-btn"></button>
+      </div>
+    </div>
+    <div class="cat-bar" id="cat-side"></div>
+    <div class="prod-grid" id="products-body"></div>
+    <div class="empty hide" id="products-empty"></div>
+  </div>
+
+  <!-- LOG -->
+  <div class="page" id="tab-log">
+    <div class="card" style="padding:1rem;">
+      <div id="log-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+      <div class="empty hide" id="log-empty"></div>
+    </div>
+  </div>
+
+  <!-- PARTNERS -->
+  <div class="page" id="tab-users">
+    <div class="top-bar">
+      <div style="font-size:13px;color:var(--text2);" id="users-hint"></div>
+      <button class="btn primary" onclick="openUser()" id="add-user-btn"></button>
+    </div>
+    <div class="card"><div class="table-wrap">
+      <table><thead id="users-head"></thead><tbody id="users-body"></tbody></table>
+    </div></div>
+  </div>
+  </main>
+</div>
+
+<div class="modal-bg" id="modal-bg"><div class="modal" id="modal-box"></div></div>
+
+<script>
+/* ══════════ ПЕРЕКЛАДИ / TRANSLATIONS ══════════ */
+const DICT = {
+uk: {
+  sub:'Спільна система замовлень', login:'Логін', password:'Пароль', signIn:'Увійти',
+  noConn:'Немає зв\'язку із сервером', enterBoth:'Введіть логін і пароль',
+  lockedFor:'Забагато спроб. Спробуйте через {n} хв',
+  profile:'Профіль', logout:'Вийти', refresh:'Оновити', syncOk:'Google Sheets',
+  loading:'Завантаження...', updatedAt:'Оновлено: {t}', admin:'Адміністратор',
+  tabOrders:'Замовлення', tabProducts:'Товари', tabLog:'Журнал', tabUsers:'Партнери',
+  fAll:'Всі', fNew:'Нові', fUnpaid:'Не оплачено', fPending:'Очікують', fShipped:'Відправлені',
+  allMonths:'Всі місяці', searchPh:'Пошук...', searchProdPh:'Назва або SKU...',
+  btnOrder:'Замовлення', btnProduct:'Товар', btnPalette:'Палітра', btnPartner:'Партнер',
+  stTotal:'Всього', stUnpaid:'Не оплачено', stPending:'Очікують', stShipped:'Відправлено',
+  colBuyer:'Покупець', colItem:'Товар', colDate:'Дата', colCountry:'Країна',
+  colPayment:'Оплата', colStatus:'Статус', colTrack:'Трек-номер', colFiles:'Файли',
+  colSku:'SKU', colName:'Назва', colVariants:'Варіанти', colVisible:'Видимість',
+  colPrice:'Ціна', currency:'Валюта', sum:'Сума',
+  showPass:'Показати', hidePass:'Сховати',
+  categories:'Категорії', allCategories:'Усі', noCategory:'Без категорії',
+  colPhoto:'Фото', mainPhoto:'Головне фото', noPhoto:'немає фото',
+  productsCount:'Товарів: {n}',
+  selected:'Обрано: {n}', selClear:'Зняти вибір',
+  resetSku:'SKU заново', skuReset:'Очищено SKU: {n}. Нові згенеруються при збереженні.',
+  duplicate:'Дублювати', duplicateQ:'Дублювати товар?',
+  duplicateHint:'Створиться копія з усіма варіантами, фото, габаритами й коробками. SKU буде новий.',
+  duplicated:'Створено копію: {n}',
+  bulkVisHint:'Налаштування застосується до всіх обраних замовлень і перепише їхню поточну видимість.',
+  bulkDone:'Оновлено замовлень: {n}',
+  colorPhoto:'Фото кольору — натисніть, щоб завантажити', clearPhoto:'Прибрати фото',
+  photoAttached:'Фото прикріплено ({n} КБ) — натисніть «Зберегти»',
+  photoLost:'Сервер не зберіг фото. Онови\u0301ть Code.gs і зробіть нове розгортання.',
+  tabMain:'Основне', tabBoxes:'Коробки',
+  dimL:'Довжина, см', dimW:'Ширина, см', dimH:'Висота, см', weight:'Вага, кг', cm:'см',
+  addBox:'Коробка', boxCost:'Вартість', boxNote:'Примітка',
+  shipTitle:'Вартість доставки', addShip:'Напрямок', shipZone:'Куди',
+  shipOne:'Вартість доставки',
+  shipHint:'Фіксована ціна доставки для напрямку. «Решта світу» діє, якщо країни немає в списку.',
+  zEU:'Євросоюз', zEUR:'Європа поза ЄС', zELSE:'Решта світу',
+  shipFor:'Доставка {c}: {p}', shipNone:'Доставка не вказана',
+  boxesHint:'Габарити й вага коробок для розрахунку доставки.',
+  optionGroups:'Варіанти', addGroup:'Група', addChoice:'Варіант вибору',
+  optionsHint:'Кожна група — окремий список вибору в замовленні. Ціну задає та опція, в якої вона вказана.',
+  groupNamePh:'Напр. Стільниця, Спинка, Колір', choicePh:'Назва варіанта',
+  kindText:'Список', kindColor:'Колір', selectOption:'— оберіть —',
+  groupPrices:'Ціни груп варіантів', noGroupsYet:'Спершу додайте групи у вкладці «Варіанти»',
+  groupPricesHint:'Ціну задає група. У замовленні ціна береться з останньої обраної групи, де вона вказана.',
+  reqGroup:'Обов\'язкова', optGroup:'(не обов\'язково)', noPick:'Без цієї опції',
+  findBySku:'Пошук за назвою або SKU…', found:'Знайдено: {n}', foundNone:'Нічого не знайдено',
+  photoCap:'підпис', photoLimit:'Максимум 12 фото на варіант',
+  photoHint:'JPG або PNG. Зберігається зменшена копія.',
+  photoTooBig:'Не вдалося стиснути фото — візьміть простіше зображення',
+  nbuOn:'НБУ {d}',
+  noRate:'Курс недоступний — показано лише введену валюту',
+  rateOn:'курс НБУ на {d}:',
+  currencyHint:'Валюта за замовчуванням для нових цін. Обидві валюти показуються завжди.',
+  colPartner:'Партнер', colActive:'Активний',
+  emptyOrders:'Замовлень не знайдено', emptyProducts:'Товарів немає', emptyLog:'Журнал порожній',
+  paid:'Оплачено', unpaid:'Не оплачено',
+  sNew:'Нове', sPending:'Очікує', sShipped:'Відправлено',
+  hiddenFrom:'приховано від: {r}', visibleAll:'всі', pcs:'шт.',
+  newOrder:'Нове замовлення', editOrder:'Редагувати замовлення',
+  buyerName:'Ім\'я покупця', qty:'Кількість', secItem:'Товар', fromCatalog:'З каталогу',
+  manualEntry:'— вписати вручну —', noVariants:'У цього товару немає варіантів',
+  basePrice:'Ціна товару', priceUsd:'Ціна, $', priceEur:'Ціна, €',
+  basePriceHint:'Для виробів без груп варіантів. У замовленні підставиться ціна тієї валюти, яку оберете.',
+  variant:'Варіант', manualName:'Назва вручну', manualPh:'Завіса до столу, фурнітура...',
+  needReload:'Вийшла нова версія — оновіть сторінку', reloadBtn:'Оновити', srvFail:'Збій сервера',
+  reloadHint:'Натисніть Ctrl+Shift+R, щоб оновити сторінку',
+  buyerEmail:'Пошта покупця', copy:'Копіювати', copied:'Адресу скопійовано',
+  vatLbl:'VAT / податок', vatPh:'Etsy VAT: CHE-373.086.513\nOrder value: CHF337.44\nVAT paid: CHF33.93',
+  vatHint:'Дані, які треба вказати на посилці, щоб покупця не оподаткували вдруге.',
+  secShipping:'Доставка', street:'Вулиця', city:'Місто', state:'Штат', zip:'Індекс',
+  country:'Країна', phone:'Телефон', secStatus:'Статус', note:'Примітка', notePh:'Особливі побажання...',
+  whoSees:'Кому видно', whoSeesHint:'Зніміть галочку — цей партнер не побачить запис узагалі.',
+  noPartnersYet:'Інших партнерів поки немає',
+  cancel:'Скасувати', save:'Зберегти', close:'Закрити', delete:'Видалити',
+  needBuyerItem:'Вкажіть покупця та товар', pickVariant:'Оберіть варіант товару',
+  saved:'Збережено', orderAdded:'Замовлення додано', markedPaid:'Позначено як оплачено',
+  statusUpdated:'Статус оновлено', orderDeleted:'Замовлення видалено',
+  deleteOrderQ:'Видалити замовлення?', deleteProductQ:'Видалити товар?', deletePartnerQ:'Видалити партнера?',
+  partnerGone:'{n} — доступ буде припинено назавжди.',
+  carrier:'Перевізник', notSet:'— не вказано —', trackNo:'Трек-номер',
+  addedOn:'Додано', color:'Колір', comments:'Коментарі', noComments:'Коментарів немає',
+  commentPh:'Написати коментар...',
+  preview:'Переглянути', optional:'не обов\'язково',
+  filesFor:'Файли', docType:'Тип документа', dLabel:'Етикетка', dPayment:'Оплата',
+  dInvoice:'Інвойс', dOther:'Інше',
+  dropHere:'Натисніть, щоб додати файл', upTo:'PDF, PNG, JPG · до 25 МБ',
+  noFiles:'Файлів немає', uploading:'Завантаження...', fileSaved:'Файл збережено',
+  fileDeleted:'Файл видалено', fileTooBig:'Файл завеликий (макс. 25 МБ)', preparing:'Готую файл...',
+  newProduct:'Новий товар', editProduct:'Редагувати товар',
+  prodName:'Назва', prodNamePh:'Стіл розкладний дубовий', auto:'авто',
+  category:'Категорія', categoryPh:'Столи', description:'Опис',
+  variants:'Варіанти', variantsHint:'Колір підтягує відтінок із палітри. SKU генеруються автоматично.',
+  materialPh:'Матеріал (Дуб розкладний)', colorDash:'— колір —', size:'Розмір',
+  needProdName:'Вкажіть назву товару', productSaved:'Товар збережено', productAdded:'Товар додано',
+  productDeleted:'Товар видалено',
+  palette:'Палітра кольорів', colorName:'Назва кольору',
+  paletteHint:'Фото показується у кружечках і зразках у формі замовлення.',
+  paletteSaved:'Палітру збережено', btnColor:'Колір',
+  usersHint:'Вимкнений партнер не може увійти взагалі. Ховати окремі записи — у картці замовлення чи товару.',
+  newPartner:'Новий партнер', partnerCard:'Партнер', company:'Компанія', contact:'Контактна особа',
+  logoLabel:'Логотип', choose:'Вибрати', logoHint:'PNG або JPG, обріжеться у квадрат',
+  logoTooBig:'Логотип завеликий — візьміть простіше зображення', logoBadRead:'Не вдалося прочитати зображення',
+  allPartners:'Усі партнери', ordersWord:'замовлень',
+  interfaceLang:'Мова інтерфейсу', tgChat:'Telegram chat id',
+  tgToken:'Токен бота', tgTokenPh:'токен бота 8123…:AAH…',
+  emailLbl:'Пошта для сповіщень',
+  emailHint:'Ті самі сповіщення приходитимуть листом. Порожньо — листів немає.',
+  tgBots:'Telegram — чати й боти', addBotRow:'Ще бот',
+  tgMirror:'Отримувати в боті партнера',
+  tgMirrorHint:'Копія приходить у ваш чат, але через бота того партнера, якого стосується запис — тоді кожен партнер в окремому чаті. Власний токен тут не потрібен, достатньо chat id. Напишіть /start кожному боту партнерів.',
+  findChat:'Дізнатися chat id', needToken:'Спершу вставте токен бота',
+  deployHint:'Сервер не відповів. Розгорніть нову версію: Ввести в дію → Керувати розгортаннями → Нова версія',
+  noChats:'Боту {b} ще ніхто не писав — надішліть йому /start',
+  pickChat:'Оберіть чат — його id підставиться в поле',
+  tgTokenHint:'Пара «chat id + токен»: куди писати і через якого бота. Можна кілька — повідомлення прийде в кожен чат. Порожньо — сповіщень немає.',
+  isAdmin:'Адміністратор (бачить усе, керує партнерами)',
+  newPassOpt:'Новий пароль (залиште порожнім, щоб не змінювати)', passReq:'Пароль',
+  passPh:'мінімум 6 символів',
+  needName:'Вкажіть ім\'я', partnerOn:'Партнера увімкнено', partnerOff:'Партнера вимкнено',
+  enabled:'Увімкнено', disabled:'Вимкнено', deleted:'Видалено',
+  myProfile:'Мій профіль', displayName:'Ім\'я (показується в журналі та коментарях)',
+  saveName:'Зберегти ім\'я', nameSaved:'Ім\'я збережено',
+  changePass:'Зміна пароля', currentPass:'Поточний пароль', newPass:'Новий пароль',
+  doChangePass:'Змінити пароль', passChanged:'Пароль змінено',
+  error:'Помилка', renderErr:'Помилка відображення: {m}',
+  edit:'Змінити', view:'Перегляд', download:'Завантажити', disable:'Вимкнути', enable:'Увімкнути',
+  months:['Січень','Лютий','Березень','Квітень','Травень','Червень','Липень','Серпень','Вересень','Жовтень','Листопад','Грудень'],
+  locale:'uk-UA'
+},
+en: {
+  sub:'Shared order system', login:'Login', password:'Password', signIn:'Sign in',
+  noConn:'No connection to the server', enterBoth:'Enter login and password',
+  lockedFor:'Too many attempts. Try again in {n} min',
+  profile:'Profile', logout:'Sign out', refresh:'Refresh', syncOk:'Google Sheets',
+  loading:'Loading...', updatedAt:'Updated: {t}', admin:'Admin',
+  tabOrders:'Orders', tabProducts:'Products', tabLog:'Activity', tabUsers:'Partners',
+  fAll:'All', fNew:'New', fUnpaid:'Unpaid', fPending:'Pending', fShipped:'Shipped',
+  allMonths:'All months', searchPh:'Search...', searchProdPh:'Name or SKU...',
+  btnOrder:'Order', btnProduct:'Product', btnPalette:'Palette', btnPartner:'Partner',
+  stTotal:'Total', stUnpaid:'Unpaid', stPending:'Pending', stShipped:'Shipped',
+  colBuyer:'Buyer', colItem:'Item', colDate:'Date', colCountry:'Country',
+  colPayment:'Payment', colStatus:'Status', colTrack:'Tracking', colFiles:'Files',
+  colSku:'SKU', colName:'Name', colVariants:'Variants', colVisible:'Visibility',
+  colPrice:'Price', currency:'Currency', sum:'Total',
+  showPass:'Show', hidePass:'Hide',
+  categories:'Categories', allCategories:'All', noCategory:'Uncategorised',
+  colPhoto:'Photo', mainPhoto:'Main photo', noPhoto:'no photo',
+  productsCount:'Products: {n}',
+  selected:'Selected: {n}', selClear:'Clear',
+  resetSku:'Regenerate SKUs', skuReset:'Cleared {n} SKUs. New ones are generated on save.',
+  duplicate:'Duplicate', duplicateQ:'Duplicate this product?',
+  duplicateHint:'A copy is created with all variants, photos, dimensions and boxes. The SKU will be new.',
+  duplicated:'Copy created: {n}',
+  bulkVisHint:'This will be applied to every selected order and overwrite their current visibility.',
+  bulkDone:'Orders updated: {n}',
+  colorPhoto:'Colour photo — click to upload', clearPhoto:'Remove photo',
+  photoAttached:'Photo attached ({n} KB) — now press Save',
+  photoLost:'The server did not store the photo. Update Code.gs and redeploy.',
+  tabMain:'General', tabBoxes:'Boxes',
+  dimL:'Length, cm', dimW:'Width, cm', dimH:'Height, cm', weight:'Weight, kg', cm:'cm',
+  addBox:'Box', boxCost:'Cost', boxNote:'Note',
+  shipTitle:'Shipping cost', addShip:'Destination', shipZone:'Where',
+  shipOne:'Shipping cost',
+  shipHint:'Fixed shipping price per destination. “Everywhere else” applies when the country is not listed.',
+  zEU:'European Union', zEUR:'Europe non-EU', zELSE:'Everywhere else',
+  shipFor:'Shipping to {c}: {p}', shipNone:'Shipping not set',
+  boxesHint:'Box dimensions and weight for shipping calculations.',
+  optionGroups:'Variants', addGroup:'Group', addChoice:'Choice',
+  optionsHint:'Each group becomes its own selector in the order. Price comes from whichever choice defines one.',
+  groupNamePh:'e.g. Tabletop, Backrest, Colour', choicePh:'Choice name',
+  kindText:'List', kindColor:'Colour', selectOption:'— select —',
+  groupPrices:'Option group prices', noGroupsYet:'Add groups on the “Variants” tab first',
+  groupPricesHint:'Price comes from the group. In an order it is taken from the last picked group that has one.',
+  reqGroup:'Required', optGroup:'(optional)', noPick:'Without this option',
+  findBySku:'Search by name or SKU…', found:'Found: {n}', foundNone:'Nothing found',
+  photoCap:'caption', photoLimit:'Up to 12 photos per choice',
+  photoHint:'JPG or PNG. A resized copy is stored.',
+  photoTooBig:'Could not compress the photo — use a simpler image',
+  nbuOn:'NBU {d}',
+  noRate:'Exchange rate unavailable — showing the entered currency only',
+  rateOn:'NBU rate on {d}:',
+  currencyHint:'Default currency for new prices. Both currencies are always shown.',
+  colPartner:'Partner', colActive:'Active',
+  emptyOrders:'No orders found', emptyProducts:'No products yet', emptyLog:'Activity log is empty',
+  paid:'Paid', unpaid:'Unpaid',
+  sNew:'New', sPending:'Pending', sShipped:'Shipped',
+  hiddenFrom:'hidden from: {r}', visibleAll:'everyone', pcs:'variants',
+  newOrder:'New order', editOrder:'Edit order',
+  buyerName:'Buyer name', qty:'Quantity', secItem:'Item', fromCatalog:'From catalogue',
+  manualEntry:'— type manually —', noVariants:'This product has no variants',
+  basePrice:'Product price', priceUsd:'Price, $', priceEur:'Price, €',
+  basePriceHint:'For products without option groups. The order takes the price of the currency you pick.',
+  variant:'Variant', manualName:'Custom item name', manualPh:'Table hinge, hardware...',
+  needReload:'A new version is available — please reload', reloadBtn:'Reload', srvFail:'Server error',
+  reloadHint:'Press Ctrl+Shift+R to reload the page',
+  buyerEmail:'Buyer email', copy:'Copy', copied:'Address copied',
+  vatLbl:'VAT / tax', vatPh:'Etsy VAT: CHE-373.086.513\nOrder value: CHF337.44\nVAT paid: CHF33.93',
+  vatHint:'Info to put on the parcel so the buyer is not taxed twice.',
+  secShipping:'Shipping', street:'Street', city:'City', state:'State', zip:'ZIP',
+  country:'Country', phone:'Phone', secStatus:'Status', note:'Note', notePh:'Special requests...',
+  whoSees:'Who can see it', whoSeesHint:'Uncheck a partner and they will not see this record at all.',
+  noPartnersYet:'No other partners yet',
+  cancel:'Cancel', save:'Save', close:'Close', delete:'Delete',
+  needBuyerItem:'Enter buyer and item', pickVariant:'Choose a product variant',
+  saved:'Saved', orderAdded:'Order added', markedPaid:'Marked as paid',
+  statusUpdated:'Status updated', orderDeleted:'Order deleted',
+  deleteOrderQ:'Delete this order?', deleteProductQ:'Delete this product?', deletePartnerQ:'Delete this partner?',
+  partnerGone:'{n} — access will be revoked permanently.',
+  carrier:'Carrier', notSet:'— not set —', trackNo:'Tracking number',
+  addedOn:'Created', color:'Colour', comments:'Comments', noComments:'No comments yet',
+  commentPh:'Write a comment...',
+  preview:'Preview', optional:'optional',
+  filesFor:'Files', docType:'Document type', dLabel:'Shipping label', dPayment:'Payment proof',
+  dInvoice:'Invoice', dOther:'Other',
+  dropHere:'Click to attach a file', upTo:'PDF, PNG, JPG · up to 25 MB',
+  noFiles:'No files', uploading:'Uploading...', fileSaved:'File saved',
+  fileDeleted:'File deleted', fileTooBig:'File too large (max 25 MB)', preparing:'Preparing file...',
+  newProduct:'New product', editProduct:'Edit product',
+  prodName:'Name', prodNamePh:'Extending oak table', auto:'auto',
+  category:'Category', categoryPh:'Tables', description:'Description',
+  variants:'Variants', variantsHint:'Colour pulls its shade from the palette. SKUs are generated automatically.',
+  materialPh:'Material (Extending oak)', colorDash:'— colour —', size:'Size',
+  needProdName:'Enter a product name', productSaved:'Product saved', productAdded:'Product added',
+  productDeleted:'Product deleted',
+  palette:'Colour palette', colorName:'Colour name',
+  paletteHint:'The photo is shown in the dots and swatches in the order form.',
+  paletteSaved:'Palette saved', btnColor:'Colour',
+  usersHint:'A disabled partner cannot sign in at all. Hide individual records from the order or product card.',
+  newPartner:'New partner', partnerCard:'Partner', company:'Company', contact:'Contact person',
+  logoLabel:'Logo', choose:'Choose', logoHint:'PNG or JPG, cropped to a square',
+  logoTooBig:'Logo too large — use a simpler image', logoBadRead:'Could not read the image',
+  allPartners:'All partners', ordersWord:'orders',
+  interfaceLang:'Interface language', tgChat:'Telegram chat id',
+  tgToken:'Bot token', tgTokenPh:'bot token 8123…:AAH…',
+  emailLbl:'Email for notifications',
+  emailHint:'The same notifications arrive by email. Empty — no emails.',
+  tgBots:'Telegram — chats and bots', addBotRow:'Add bot',
+  tgMirror:'Receive through the partner’s bot',
+  tgMirrorHint:'The copy arrives in your chat but through the bot of the partner the record concerns. Send /start to each of those bots.',
+  findChat:'Find chat id', needToken:'Paste the bot token first',
+  deployHint:'No response from the server. Deploy a new version: Deploy → Manage deployments → New version',
+  noChats:'Nobody has written to {b} yet — send it /start',
+  pickChat:'Pick a chat — its id goes into the field',
+  tgTokenHint:'A pair of chat id and bot token: where to write and through which bot. Several pairs are allowed. Empty — no notifications.',
+  isAdmin:'Admin (sees everything, manages partners)',
+  newPassOpt:'New password (leave blank to keep current)', passReq:'Password',
+  passPh:'at least 6 characters',
+  needName:'Enter a name', partnerOn:'Partner enabled', partnerOff:'Partner disabled',
+  enabled:'Enabled', disabled:'Disabled', deleted:'Deleted',
+  myProfile:'My profile', displayName:'Name (shown in the log and comments)',
+  saveName:'Save name', nameSaved:'Name saved',
+  changePass:'Change password', currentPass:'Current password', newPass:'New password',
+  doChangePass:'Change password', passChanged:'Password changed',
+  error:'Error', renderErr:'Rendering error: {m}',
+  edit:'Edit', view:'View', download:'Download', disable:'Disable', enable:'Enable',
+  months:['January','February','March','April','May','June','July','August','September','October','November','December'],
+  locale:'en-US'
+}};
+
+const ERR_EN = {
+  'Вкажіть покупця та товар':'Enter buyer and item',
+  'Замовлення не знайдено':'Order not found',
+  'Товар не знайдено':'Product not found',
+  'Файл не знайдено':'File not found',
+  'Партнера не знайдено':'Partner not found',
+  'Порожній коментар':'Comment is empty',
+  'Файл порожній':'File is empty',
+  'Файл завеликий (макс. ~25 МБ)':'File too large (max ~25 MB)',
+  'Недостатньо прав для цієї дії':'You do not have permission for this action',
+  'Поточний пароль невірний':'Current password is incorrect',
+  'Пароль має містити щонайменше 6 символів':'Password must be at least 6 characters',
+  'Такий логін уже існує':'That login is already taken',
+  'Вкажіть назву товару':'Enter a product name',
+  'Покупець не може бути порожнім':'Buyer cannot be empty',
+  'Не можна видалити самого себе':'You cannot delete yourself',
+  'Не можна зняти з себе права адміністратора чи вимкнути себе':'You cannot remove your own admin rights or disable yourself',
+  'Це останній адміністратор — його не можна видалити':'This is the last admin and cannot be deleted',
+  'Логін: 3–32 символи — латинські літери, цифри, крапка, _ або -':'Login: 3–32 characters — latin letters, digits, dot, _ or -',
+  'Некоректний логотип — потрібен PNG, JPG або WEBP':'Invalid logo — PNG, JPG or WEBP required',
+  'Фото не знайдено':'Photo not found',
+  'Невідомий статус':'Unknown status',
+  'Невірна адреса пошти':'Invalid email address',
+  'Некоректна мініатюра фото':'Invalid photo thumbnail',
+  'Не вибрано жодного замовлення':'No orders selected',
+  'Вкажіть токен бота':'Enter the bot token',
+  'Вкажіть ім\'я':'Enter a name',
+  'Занадто довге ім\'я':'Name is too long',
+  'Забагато варіантів в одному товарі — розділіть його на два':'Too many options in one product — split it in two',
+  'Немає колонки hiddenFor — запустіть setup()':'No hiddenFor column — run setup()',
+  'Сесія завершилась — увійдіть знову':'Session expired — please sign in again',
+  'Невірний логін або пароль':'Wrong login or password',
+  'Невідома дія':'Unknown action',
+  'Назва':'A product with this name already exists',
+  'SKU':'This SKU is already in use',
+  'Токен виглядає неповним':'The token looks incomplete — copy the whole 8123456789:AAH… from BotFather',
+  'Токен не працює':'The token does not work — check it in BotFather',
+  'Telegram відповів':'Telegram replied with an error',
+  'getUpdates':'Telegram: cannot read updates for this bot'
+};
+
+let LANG = localStorage.getItem('gs_lang') || 'uk';
+function L() { return DICT[LANG] || DICT.uk; }
+function t(k, vars) {
+  let s = L()[k];
+  if (s === undefined) s = DICT.uk[k] !== undefined ? DICT.uk[k] : k;
+  if (vars) Object.keys(vars).forEach(v => { s = s.split('{' + v + '}').join(vars[v]); });
+  return s;
+}
+function errMsg(m) {
+  if (!m) return t('error');
+  if (LANG === 'en') {
+    if (ERR_EN[m]) return ERR_EN[m];
+    const hit = Object.keys(ERR_EN).find(k => String(m).indexOf(k) === 0);
+    if (hit) return ERR_EN[hit];
+  }
+  return m;
+}
+
+/* ══════════ СТАН / STATE ══════════ */
+const UI_VER = 'v29.10-3';          // має збігатися з APP_VER у Code.gs
+let TOKEN = localStorage.getItem('gs_token') || '';
+let ME = null;
+let orders = [], products = [], colors = [], users = [], partners = [];
+let filter = 'all', monthFilter = 'all', catFilter = 'all', partnerFilter = 'all';
+let fx = { eurUsd: 0 };
+
+/* ── Гроші: завжди показуємо обидві валюти ── */
+function sym(c) { return c === 'EUR' ? '€' : '$'; }
+function fmtNum(n) {
+  return (+n).toLocaleString(L().locale, { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+}
+function conv(a, from, to) {
+  if (from === to) return +a;
+  if (!fx.eurUsd) return null;
+  return from === 'EUR' ? +a * fx.eurUsd : +a / fx.eurUsd;
+}
+function money(a, c) {
+  if (a === '' || a === null || a === undefined || isNaN(+a)) return '<span style="color:var(--text3)">—</span>';
+  const cc = c === 'EUR' ? 'EUR' : 'USD';
+  return `<span style="font-weight:500;">${sym(cc)}${fmtNum(a)}</span>`;
+}
+function myCur() { return ME && ME.currency === 'EUR' ? 'EUR' : 'USD'; }
+
+// Знімок кольору з палітри за його назвою
+function colorImg(name) {
+  const c = colors.find(x => x.name === name);
+  return c && c.img ? c.img : '';
+}
+
+// Стиль для кружечка / квадратика кольору: фото, якщо є, інакше заливка
+function colorStyle(hex, name) {
+  const im = colorImg(name);
+  return im
+    ? `background-image:url(${im});background-size:cover;background-position:center;`
+    : `background:${hex || '#e6e4dd'};`;
+}
+
+// Смужка з курсами валют у шапці
+function renderFx() {
+  const el = $('fx-bar');
+  if (!el) return;
+  if (!fx.eurUsd) { el.classList.add('hide'); return; }
+  el.classList.remove('hide');
+  const parts = ['1 € = <b>' + fmtNum(fx.eurUsd) + ' $</b>'];
+  if (fx.usdUah) parts.push('1 $ = <b>' + fmtNum(fx.usdUah) + ' ₴</b>');
+  if (fx.eurUah) parts.push('1 € = <b>' + fmtNum(fx.eurUah) + ' ₴</b>');
+  el.innerHTML = parts.join('<span class="sep">·</span>') +
+    '<span class="sep">·</span><span style="color:var(--text3)">' +
+    t('nbuOn', { d: fx.date || '' }) + (fx.stale ? ' ⚠' : '') + '</span>';
+}
+function curOpts(sel) {
+  return ['USD','EUR'].map(c =>
+    `<option value="${c}" ${c === (sel || 'USD') ? 'selected' : ''}>${c} ${sym(c)}</option>`).join('');
+}
+
+const ST_KEYS = { new:'sNew', pending:'sPending', shipped:'sShipped' };
+
+const COUNTRIES = {
+  US:['🇺🇸','США','USA'], CA:['🇨🇦','Канада','Canada'], GB:['🇬🇧','Велика Британія','United Kingdom'],
+  AU:['🇦🇺','Австралія','Australia'], DE:['🇩🇪','Німеччина','Germany'], FR:['🇫🇷','Франція','France'],
+  IT:['🇮🇹','Італія','Italy'], ES:['🇪🇸','Іспанія','Spain'], NL:['🇳🇱','Нідерланди','Netherlands'],
+  BE:['🇧🇪','Бельгія','Belgium'], AT:['🇦🇹','Австрія','Austria'], CH:['🇨🇭','Швейцарія','Switzerland'],
+  SE:['🇸🇪','Швеція','Sweden'], NO:['🇳🇴','Норвегія','Norway'], DK:['🇩🇰','Данія','Denmark'],
+  FI:['🇫🇮','Фінляндія','Finland'], PL:['🇵🇱','Польща','Poland'], CZ:['🇨🇿','Чехія','Czechia'],
+  SK:['🇸🇰','Словаччина','Slovakia'], HU:['🇭🇺','Угорщина','Hungary'], RO:['🇷🇴','Румунія','Romania'],
+  PT:['🇵🇹','Португалія','Portugal'], GR:['🇬🇷','Греція','Greece'], IE:['🇮🇪','Ірландія','Ireland'],
+  NZ:['🇳🇿','Нова Зеландія','New Zealand'], SG:['🇸🇬','Сінгапур','Singapore'], JP:['🇯🇵','Японія','Japan'],
+  UA:['🇺🇦','Україна','Ukraine'], other:['🌍','Інша','Other']
+};
+const CARRIERS = { ups:'UPS', fedex:'FedEx', usps:'USPS', dhl:'DHL', nova:'Nova Poshta', other:'Other' };
+
+/* ══════════ API ══════════ */
+function api(action, data) {
+  const payload = Object.assign({ token: TOKEN }, data || {});
+  return new Promise(resolve => {
+    google.script.run
+      .withSuccessHandler(r => {
+        let res; try { res = JSON.parse(r); } catch (e) { res = { error: t('error') }; }
+        if (res && res._v) checkVer(res._v);
+        if (res && res.error === 'AUTH') { forceLogout(''); resolve(null); return; }
+        resolve(res);
+      })
+      .withFailureHandler(err => resolve({ error: t('srvFail') + ': ' + ((err && err.message) || '—') }))
+      .apiCall(action, JSON.stringify(payload));
+  });
+}
+
+/* ══════════ МОВА ══════════ */
+function setLangLocal(l) {
+  LANG = l === 'en' ? 'en' : 'uk';
+  localStorage.setItem('gs_lang', LANG);
+  document.documentElement.lang = LANG;
+  paintStatic();
+  verBarText();                       // плашку теж перекладаємо
+  if (ME) { buildTabs(); renderOrders(); renderProducts(); }
+}
+async function setLangRemote(l) {
+  setLangLocal(l);
+  const res = await api('setLang', { lang: LANG });
+  if (res && res.user) ME = res.user;
+}
+
+function paintStatic() {
+  const S = {
+    'l-sub':'sub', 'l-login-lb':'login', 'l-pass-lb':'password', 'l-btn':'signIn',
+    'btn-refresh':'refresh', 'add-order-btn':'btnOrder', 'add-product-btn':'btnProduct',
+    'colors-btn':'btnPalette', 'add-user-btn':'btnPartner', 'users-hint':'usersHint',
+    'orders-empty':'emptyOrders', 'products-empty':'emptyProducts', 'log-empty':'emptyLog'
+  };
+  Object.keys(S).forEach(id => {
+    const el = $(id); if (!el) return;
+    const ic = el.querySelector && el.querySelector('i');
+    el.textContent = t(S[id]);
+    if (ic) el.prepend(ic);
+  });
+  $('search').placeholder = t('searchPh');
+  $('p-search').placeholder = t('searchProdPh');
+  const eye = $('l-eye');
+  if (eye) eye.textContent = $('l-pass').type === 'password' ? t('showPass') : t('hidePass');
+  const sv = $('sel-vis'); if (sv) sv.textContent = t('whoSees');
+  const sc = $('sel-clear'); if (sc) sc.textContent = t('selClear');
+  $('btn-profile').title = t('profile');
+  $('btn-logout').title = t('logout');
+  $('lang-uk').classList.toggle('on', LANG === 'uk');
+  $('lang-en').classList.toggle('on', LANG === 'en');
+  sync(false);
+
+  $('filter-bar').innerHTML = [['all','fAll'],['new','fNew'],['unpaid','fUnpaid'],['pending','fPending'],['shipped','fShipped']]
+    .map(f => `<button class="chip${filter === f[0] ? ' active' : ''}" data-f="${f[0]}" onclick="setFilter('${f[0]}')">${t(f[1])}</button>`).join('');
+
+  $('orders-head').innerHTML = `<tr><th class="selcell"><input type="checkbox" id="sel-all" onchange="selAll(this)"></th><th>#</th><th>${t('colBuyer')}</th><th>${t('colItem')}</th><th>${t('colPrice')}</th><th>${t('colDate')}</th>
+    <th>${t('colCountry')}</th><th>${t('colPayment')}</th><th>${t('colStatus')}</th><th>${t('colTrack')}</th><th>${t('colFiles')}</th><th></th></tr>`;
+  $('users-head').innerHTML = `<tr><th></th><th>${t('colPartner')}</th><th>${t('login')}</th>
+    <th>Telegram</th><th>${t('colActive')}</th><th></th></tr>`;
+}
+
+/* ══════════ ВХІД ══════════ */
+// Показати / сховати пароль на екрані входу
+function togglePw() {
+  const inp = $('l-pass'), btn = $('l-eye');
+  const show = inp.type === 'password';
+  inp.type = show ? 'text' : 'password';
+  btn.textContent = show ? t('hidePass') : t('showPass');
+  inp.focus();
+}
+
+async function doLogin() {
+  const login = val('l-login').trim(), password = val('l-pass');
+  const err = $('l-err'), btn = $('l-btn');
+  if (!login || !password) { err.textContent = t('enterBoth'); return; }
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>';
+  const res = await api('login', { login, password });
+  btn.disabled = false; btn.textContent = t('signIn');
+  if (!res) { err.textContent = t('noConn'); return; }
+  if (res.error === 'LOCKED') { err.textContent = t('lockedFor', { n: Math.ceil(res.wait / 60) }); return; }
+  if (res.error) { err.textContent = errMsg(res.error); return; }
+  TOKEN = res.token;
+  localStorage.setItem('gs_token', TOKEN);
+  ME = res.user;
+  startApp();
+}
+
+function forceLogout(msg) {
+  TOKEN = ''; ME = null;
+  localStorage.removeItem('gs_token');
+  $('app-screen').classList.add('hide');
+  $('login-screen').classList.remove('hide');
+  $('l-err').textContent = msg || '';
+  $('l-pass').value = '';
+}
+async function doLogout() { await api('logout', {}); forceLogout(''); }
+
+/* ══════════ СТАРТ ══════════ */
+async function boot() {
+  paintStatic();
+  const vr = $('ui-ver');
+  if (vr) vr.textContent = UI_VER;
+  if (!TOKEN) return;
+  const res = await api('me', {});
+  if (res && res.user) { ME = res.user; checkVer(res.ver); startApp(); }
+}
+
+// Сторінка з кеша браузера — просимо оновити
+function checkVer(serverVer) {
+  if (!serverVer || serverVer === UI_VER || $('ver-bar')) return;
+  const d = document.createElement('div');
+  d.id = 'ver-bar';
+  document.body.appendChild(d);
+  verBarText();
+}
+
+function verBarText() {
+  const d = $('ver-bar');
+  if (!d) return;
+  d.innerHTML = `<span>${t('needReload')}</span>
+    <button class="btn sm" onclick="hardReload()">${t('reloadBtn')}</button>`;
+}
+
+/* Застосунок живе в iframe (GitHub Pages → Apps Script → наш код).
+   location.reload() усередині пісочниці Google дає білий екран,
+   тому просимо перезавантажитись зовнішню сторінку. */
+function hardReload() {
+  let framed = true;
+  try { framed = window.top !== window.self; } catch (e) { framed = true; }
+  if (!framed) { location.reload(); return; }
+
+  try { window.top.postMessage('partners-reload', '*'); } catch (e) {}
+  try { window.parent.postMessage('partners-reload', '*'); } catch (e) {}
+
+  setTimeout(() => {                       // оболонка не відгукнулась — підказка
+    const d = $('ver-bar');
+    if (d) d.innerHTML = `<span>${t('reloadHint')}</span>`;
+  }, 1500);
+}
+
+function startApp() {
+  if (ME.lang && ME.lang !== LANG) setLangLocal(ME.lang);
+  $('login-screen').classList.add('hide');
+  $('app-screen').classList.remove('hide');
+  $('me-name').textContent = ME.company || ME.name;
+  const ap = $('me-admin');
+  ap.textContent = t('admin');
+  ap.classList.toggle('hide', !ME.admin);
+  const ml = $('me-logo');
+  if (ME.logo) { ml.src = ME.logo; ml.classList.remove('hide'); } else ml.classList.add('hide');
+  paintStatic();
+  buildTabs();
+  loadAll();
+}
+
+function buildTabs() {
+  const list = [['orders','tabOrders']];
+  if (ME.admin) list.push(['products','tabProducts'], ['log','tabLog'], ['users','tabUsers']);
+  const cur = document.querySelector('.tab.active');
+  const active = cur ? (cur.getAttribute('onclick').match(/'(\w+)'/) || [])[1] : 'orders';
+  $('tabs').innerHTML = list.map(x =>
+    `<button class="tab${x[0] === active ? ' active' : ''}" onclick="showTab('${x[0]}')">${t(x[1])}</button>`).join('');
+  showTab(list.some(x => x[0] === active) ? active : 'orders');
+}
+
+function showTab(tab) {
+  document.querySelectorAll('.tab').forEach(el =>
+    el.classList.toggle('active', el.getAttribute('onclick').indexOf("'" + tab + "'") > -1));
+  document.querySelectorAll('.page').forEach(el => el.classList.toggle('active', el.id === 'tab-' + tab));
+  if (tab === 'log') loadLogs();
+  if (tab === 'users') loadUsers();
+}
+
+/* ══════════ ЗАВАНТАЖЕННЯ ══════════ */
+async function loadAll() {
+  sync(true);
+  try {
+    const [o, p, c, pr, r] = await Promise.all([
+      api('getOrders', {}), api('getProducts', {}), api('getColors', {}),
+      api('getPartners', {}), api('getRate', {})
+    ]);
+    if (o  && !o.error)  orders   = o.orders    || [];
+    if (p  && !p.error)  products = p.products  || [];
+    if (c  && !c.error)  colors   = c.colors    || [];
+    if (pr && !pr.error) partners = pr.partners || [];
+    if (r  && r.eurUsd)  fx = r;
+    renderFx();
+    renderOrders();
+    renderProducts();
+  } catch (e) {
+    toast(t('renderErr', { m: e.message }), 'error');
+  } finally {
+    sync(false);
+    $('last-sync').textContent = t('updatedAt', { t: new Date().toLocaleTimeString(L().locale) });
+  }
+}
+
+async function loadLogs() {
+  const r = await api('getLogs', {});
+  const logs = (r && r.logs) || [];
+  toggle('log-empty', !logs.length);
+  $('log-list').innerHTML = logs.map(l => `<div style="display:flex;gap:10px;padding:10px 12px;background:var(--bg2);border-radius:var(--radius);font-size:13px;">
+    <div style="font-size:12px;color:var(--text3);white-space:nowrap;min-width:116px;">${esc(l.time)}</div>
+    <div style="flex:1;">${esc(l.msg)}</div>
+    <div style="font-size:11px;color:var(--text3);white-space:nowrap;">${esc(l.company || l.user)}</div></div>`).join('');
+}
+
+async function loadUsers() {
+  const r = await api('listUsers', {});
+  users = (r && r.users) || [];
+  $('users-body').innerHTML = users.map(u => `<tr>
+    <td>${u.logo ? `<img class="plogo lg" src="${u.logo}" alt="">` : '<div class="plogo lg"></div>'}</td>
+    <td><div style="font-weight:500;">${esc(u.company || u.name)}
+      ${u.admin ? `<span class="admin-pill" style="margin-left:6px;">${t('admin')}</span>` : ''}</div>
+      ${u.company ? `<div style="font-size:11px;color:var(--text3);">${esc(u.name)}</div>` : ''}</td>
+    <td class="mono">${esc(u.login)}</td>
+    <td class="mono" style="color:var(--text2);">${(u.tgBots || []).length
+      ? esc(u.tgBots.map(b => b.chat).join(', ')) : esc(u.tgChatId || '—')}</td>
+    <td>${u.active ? `<span class="badge paid">${t('enabled')}</span>` : `<span class="badge off">${t('disabled')}</span>`}</td>
+    <td style="white-space:nowrap;">
+      <button class="icon-btn" onclick="openUser('${u.id}')" title="${t('edit')}"><i class="ti ti-edit"></i></button>
+      <button class="icon-btn" onclick="toggleUser('${u.id}',${u.active ? 'false' : 'true'})" title="${u.active ? t('disable') : t('enable')}"><i class="ti ti-${u.active ? 'lock' : 'lock-open'}"></i></button>
+      <button class="icon-btn" onclick="delUser('${u.id}','${esc(u.company || u.name)}')" title="${t('delete')}"><i class="ti ti-trash"></i></button>
+    </td></tr>`).join('');
+}
+
+/* ══════════ ВИДИМІСТЬ ══════════ */
+// Партнери, яких можна ховати: усі активні, крім себе та адміністраторів
+function hideable() { return partners.filter(p => p.id !== ME.id && !p.admin); }
+function pName(id) {
+  const p = partners.find(x => x.id === id);
+  return p ? (p.company || p.name) : '—';
+}
+
+function visBlock(hiddenFor) {
+  if (!ME || !ME.admin) return '';          // партнери доступів не бачать
+  const list = hideable();
+  if (!list.length) return `<div class="sect">${t('whoSees')}</div>
+    <div style="font-size:12px;color:var(--text3);">${t('noPartnersYet')}</div>`;
+  const hid = hiddenFor || [];
+  return `<div class="sect">${t('whoSees')}</div>
+    <div class="vis-list">${list.map(p => {
+      const on = hid.indexOf(p.id) === -1;
+      return `<label class="vis-item${on ? '' : ' off'}">
+        <input type="checkbox" class="vis-chk" value="${p.id}" ${on ? 'checked' : ''}
+          onchange="this.closest('.vis-item').classList.toggle('off', !this.checked)">
+        ${p.logo ? `<img class="plogo sm" src="${p.logo}" alt="">` : '<span class="plogo sm"></span>'}
+        <span class="nm">${esc(p.company || p.name)}${p.company ? `<small>${esc(p.name)}</small>` : ''}</span>
+      </label>`;
+    }).join('')}</div>
+    <div style="font-size:11px;color:var(--text3);margin-top:6px;">${t('whoSeesHint')}</div>`;
+}
+
+// Партнер не змінює видимість — не надсилаємо поле взагалі
+function pickedHidden() {
+  if (!ME || !ME.admin) return undefined;
+  return [...document.querySelectorAll('.vis-chk')].filter(c => !c.checked).map(c => c.value);
+}
+
+/* ══════════ ЗАМОВЛЕННЯ ══════════ */
+function renderOrders() {
+  renderStats();
+  renderMonths();
+  renderPartners();
+  const base = baseList();
+  const list = base
+    .filter(o => partnerFilter === 'all' || partnerSees(partnerFilter, o))
+    .sort((a, b) => ts(b.created) - ts(a.created));
+
+  toggle('orders-empty', !list.length);
+  showSum(list);
+  const n = list.length;
+  $('orders-body').innerHTML = list.map((o, i) => `<tr${sel.has(o.id) ? ' class="rowsel"' : ''}>
+    <td class="selcell"><input type="checkbox" ${sel.has(o.id) ? 'checked' : ''} onchange="selOne('${o.id}', this)"></td>
+    <td style="color:var(--text2);font-size:11px;">#${String(n - i).padStart(3, '0')}</td>
+    <td><div class="buyer"><div style="font-weight:500;">${esc(o.buyer)}</div>
+      ${(o.street || o.city) ? `<div class="addr">${esc([o.street, o.city, o.zip].filter(Boolean).join(', '))}</div>`
+         : (o.note ? `<div class="addr">${esc(String(o.note).split('\n')[0])}</div>` : '')}
+      ${ME.admin && (o.hiddenFor || []).length ? `<span class="hidmark" title="${t('hiddenFrom', { r: o.hiddenFor.map(pName).join(', ') })}"><i class="ti ti-eye-off"></i> ${o.hiddenFor.length}</span>` : ''}</div></td>
+    <td class="itemcell"><div class="icell">${orderPic(o)}<div class="iname">${esc(o.table)}${+o.qty > 1 ? ` <span style="color:var(--text3);">×${+o.qty}</span>` : ''}</div></div></td>
+    <td style="white-space:nowrap;">${money(o.price, o.currency)}${+o.qty > 1 && o.price !== '' ? `<div style="font-size:11px;color:var(--text3);">${t('sum')}: ${sym(o.currency === 'EUR' ? 'EUR' : 'USD')}${fmtNum(+o.price * (+o.qty || 1))}</div>` : ''}</td>
+    <td style="white-space:nowrap;font-size:11.5px;color:var(--text2);">${fmtDate(o.created).replace(/\.(\d{2})(\d{2})$/, '.$2')}</td>
+    <td style="white-space:nowrap;" title="${esc(cname(o.country))}">${flag(o.country)}</td>
+    <td style="white-space:nowrap;">${o.payment === 'unpaid' && ME.admin
+      ? `<span class="tapbadge" onclick="markPaid('${o.id}')" title="${t('paid')}">${payBadge(o)}</span>`
+      : payBadge(o)}</td>
+    <td style="white-space:nowrap;"><span class="tapbadge" onclick="openStatus('${o.id}')" title="${t('colStatus')}">${stBadge(o)}</span></td>
+    <td>${trackCell(o)}</td>
+    <td><button class="icon-btn" onclick="openDocs('${o.id}')" title="${t('colFiles')}">
+      <i class="ti ti-paperclip"></i>${(o.docs || []).length ? `<span style="font-size:10px;font-weight:500;color:var(--info-text)">${o.docs.length}</span>` : ''}</button></td>
+    <td style="white-space:nowrap;">
+      <button class="icon-btn" onclick="openView('${o.id}')" title="${t('view')}"><i class="ti ti-eye"></i></button>
+      <button class="icon-btn" onclick="openOrder('${o.id}')" title="${t('edit')}"><i class="ti ti-pencil"></i></button>
+      <button class="icon-btn" onclick="delOrder('${o.id}','${esc(o.buyer)}')" title="${t('delete')}"><i class="ti ti-trash"></i></button>
+    </td></tr>`).join('');
+  selBar();
+  lazyOrderPhotos();
+}
+
+// Підсумок за поточним фільтром: кількість і сума
+function showSum(list) {
+  const el = $('sum-line');
+  if (!el) return;
+  const sums = sumOf(list);
+  el.innerHTML = `<b>${list.length}</b> ${t('ordersWord')}${sums ? ' · ' + sums : ''}`;
+}
+
+/* ══════════ Масовий вибір ══════════ */
+const sel = new Set();
+
+function selOne(id, el) {
+  if (el.checked) sel.add(id); else sel.delete(id);
+  el.closest('tr').classList.toggle('rowsel', el.checked);
+  selBar();
+}
+
+function selAll(el) {
+  document.querySelectorAll('#orders-body input[type=checkbox]').forEach(c => {
+    if (c.checked !== el.checked) { c.checked = el.checked; c.dispatchEvent(new Event('change')); }
+  });
+}
+
+function selClear() {
+  sel.clear();
+  const all = $('sel-all'); if (all) all.checked = false;
+  renderOrders();
+}
+
+function selBar() {
+  const bar = $('sel-bar');
+  if (!bar) return;
+  bar.classList.toggle('on', sel.size > 0);
+  $('sel-n').textContent = t('selected', { n: sel.size });
+}
+
+// Видимість одразу для всіх обраних
+function openBulkVis() {
+  const list = hideable();
+  if (!list.length) { toast(t('noPartnersYet'), 'error'); return; }
+  // спільний знаменник: показуємо галочку увімкненою, якщо партнер бачить усі обрані
+  const chosen = orders.filter(o => sel.has(o.id));
+  modal(`<h2><i class="ti ti-eye-off"></i> ${t('whoSees')} — ${t('selected', { n: sel.size })}</h2>
+    <div class="vis-list">${list.map(p => {
+      const on = chosen.every(o => (o.hiddenFor || []).indexOf(p.id) === -1);
+      return `<label class="vis-item${on ? '' : ' off'}">
+        <input type="checkbox" class="vis-chk" value="${p.id}" ${on ? 'checked' : ''}
+          onchange="this.closest('.vis-item').classList.toggle('off', !this.checked)">
+        ${p.logo ? `<img class="plogo sm" src="${p.logo}" alt="">` : '<span class="plogo sm"></span>'}
+        <span class="nm">${esc(p.company || p.name)}${p.company ? `<small>${esc(p.name)}</small>` : ''}</span>
+      </label>`;
+    }).join('')}</div>
+    <div style="font-size:11px;color:var(--text3);margin-top:8px;">${t('bulkVisHint')}</div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal()">${t('cancel')}</button>
+      <button class="btn primary" id="save-btn" onclick="saveBulkVis()">${t('save')}</button></div>`);
+}
+
+async function saveBulkVis() {
+  busy('save-btn');
+  const res = await api('setOrdersVisibility', { ids: [...sel], hiddenFor: pickedHidden() });
+  if (res && !res.error) {
+    toast(t('bulkDone', { n: res.n }));
+    closeModal();
+    sel.clear();
+    loadAll();
+  } else { toast(errMsg(res && res.error), 'error'); unbusy('save-btn', t('save')); }
+}
+
+function renderStats() {
+  const o = orders;
+  $('stats-bar').innerHTML =
+    stat(t('stTotal'), o.length, '') +
+    stat(t('stUnpaid'), o.filter(x => x.payment === 'unpaid').length, 'var(--danger-text)') +
+    stat(t('stPending'), o.filter(x => x.status === 'pending').length, 'var(--warn-text)') +
+    stat(t('stShipped'), o.filter(x => x.status === 'shipped').length, 'var(--success-text)');
+}
+function stat(l, v, c) {
+  return `<div class="stat"><div class="stat-label">${l}</div><div class="stat-val"${c ? ` style="color:${c}"` : ''}>${v}</div></div>`;
+}
+
+// Замовлення за поточними фільтрами, крім вибору партнера
+function baseList() {
+  const q = val('search').toLowerCase();
+  return orders
+    .filter(o => filter === 'all'
+      || (filter === 'unpaid' && o.payment === 'unpaid')
+      || (filter !== 'unpaid' && o.status === filter))
+    .filter(o => monthFilter === 'all' || monthKey(o) === monthFilter)
+    .filter(o => !q || [o.buyer, o.table, o.track, o.track2, o.buyerEmail, o.note, cname(o.country), fmtDate(o.created)]
+      .join(' ').toLowerCase().indexOf(q) > -1);
+}
+
+// Сума замовлень по валютах
+function sumOf(list) {
+  const by = {};
+  list.forEach(o => {
+    if (o.price === '' || o.price == null || isNaN(+o.price)) return;
+    const c = o.currency === 'EUR' ? 'EUR' : 'USD';
+    by[c] = (by[c] || 0) + (+o.price) * (+o.qty || 1);
+  });
+  return Object.keys(by).map(c => sym(c) + fmtNum(Math.round(by[c]))).join(' · ');
+}
+
+// Чи бачить цей партнер замовлення: не приховане ні замовлення, ні його товар
+function partnerSees(uid, o) {
+  if ((o.hiddenFor || []).indexOf(uid) > -1) return false;
+  const p = products.find(x => x.id === o.productId);
+  return !(p && (p.hiddenFor || []).indexOf(uid) > -1);
+}
+
+function renderPartners() {
+  const sel = $('partner-sel');
+  if (!sel) return;
+  const list = partners.filter(p => !p.admin);
+  if (!ME || !ME.admin || !list.length) { sel.classList.add('hide'); return; }
+  sel.classList.remove('hide');
+  const base = baseList();
+  sel.innerHTML = `<option value="all">${t('allPartners')}</option>` + list.map(p => {
+    const n = base.filter(o => partnerSees(p.id, o)).length;
+    return `<option value="${p.id}">${esc(p.company || p.name)} (${n})</option>`;
+  }).join('');
+  sel.value = list.some(p => p.id === partnerFilter) ? partnerFilter : 'all';
+  if (sel.value === 'all') partnerFilter = 'all';
+}
+
+function setPartner(v) { partnerFilter = v; renderOrders(); }
+
+function renderMonths() {
+  const keys = [...new Set(orders.map(monthKey).filter(Boolean))].sort().reverse();
+  const sel = $('month-sel'), prev = monthFilter;
+  sel.innerHTML = `<option value="all">${t('allMonths')}</option>` + keys.map(k => {
+    const [y, m] = k.split('-');
+    const cnt = orders.filter(o => monthKey(o) === k).length;
+    return `<option value="${k}">${L().months[+m - 1]} ${y} (${cnt})</option>`;
+  }).join('');
+  sel.value = keys.indexOf(prev) > -1 ? prev : 'all';
+  if (sel.value === 'all') monthFilter = 'all';
+}
+
+function setFilter(f) {
+  filter = f;
+  document.querySelectorAll('.chip').forEach(el => el.classList.toggle('active', el.dataset.f === f));
+  renderOrders();
+}
+function setMonth(v) { monthFilter = v; renderOrders(); }
+
+function payBadge(o) {
+  return o.payment === 'paid'
+    ? `<span class="badge paid"><i class="ti ti-check" style="font-size:11px"></i>${t('paid')}</span>`
+    : `<span class="badge unpaid"><i class="ti ti-clock" style="font-size:11px"></i>${t('unpaid')}</span>`;
+}
+function stBadge(o) {
+  const m = { shipped:['shipped','ti-truck'], pending:['pending','ti-package'], new:['new','ti-sparkles'] };
+  const k = m[o.status] ? o.status : 'new';
+  return `<span class="badge ${m[k][0]}"><i class="ti ${m[k][1]}" style="font-size:11px"></i>${t(ST_KEYS[k])}</span>`;
+}
+
+function trackUrl(carrier, track) {
+  const x = String(track || '').replace(/\s/g, '');
+  if (!x) return null;
+  const u = {
+    ups:'https://www.ups.com/track?tracknum=' + x,
+    fedex:'https://www.fedex.com/apps/fedextrack/?tracknumbers=' + x,
+    usps:'https://tools.usps.com/go/TrackConfirmAction?tLabels=' + x,
+    dhl:'https://www.dhl.com/en/home/tracking.html?tracking-id=' + x,
+    nova:'https://novaposhta.ua/tracking/?cargo_number=' + x
+  };
+  return u[carrier] || null;
+}
+
+function trackCell(o) {
+  if (!o.track && !o.track2)
+    return `<button class="btn sm" onclick="openTrack('${o.id}')"><i class="ti ti-plus"></i>${t('colTrack')}</button>`;
+  const one = (tr, car) => {
+    if (!tr) return '';
+    const url = trackUrl(car, tr);
+    const lbl = CARRIERS[car] || '';
+    const span = url
+      ? `<a href="${url}" target="_blank" class="mono" style="color:var(--info-text);text-decoration:none;">${esc(tr)}</a>`
+      : `<span class="mono">${esc(tr)}</span>`;
+    return `<div style="display:flex;align-items:center;gap:4px;">${
+      lbl ? `<span style="font-size:10px;background:var(--bg2);padding:1px 5px;border-radius:4px;">${lbl}</span>` : ''}${span}</div>`;
+  };
+  return `<div style="display:flex;align-items:center;gap:4px;">
+      <div>${one(o.track, o.carrier)}${one(o.track2, o.carrier2)}${
+        o.trackStatus ? `<div style="font-size:11px;color:var(--text2);margin-top:2px;">${esc(o.trackStatus)}</div>` : ''}</div>
+      <button class="icon-btn" onclick="openTrack('${o.id}')" title="${t('edit')}"><i class="ti ti-edit" style="font-size:12px"></i></button>
+    </div>`;
+}
+
+// Мініатюра товару в картці замовлення
+function prodThumb(o) {
+  const p = products.find(x => x.id === o.productId);
+  return p && p.thumb
+    ? `<img class="thumb" src="${p.thumb}" alt="" style="vertical-align:middle;margin-right:8px;" onclick="openPhoto('${p.id}')">`
+    : '';
+}
+
+// Перша кольорова опція замовлення
+function orderColor(o) {
+  const p = products.find(x => x.id === o.productId);
+  if (!p) return null;
+  let found = null;
+  (o.picks || []).forEach(pk => {
+    if (found) return;
+    const g = (p.options || []).find(x => x.id === pk.g);
+    if (!g || g.kind !== 'color') return;
+    found = g.choices.find(c => c.id === pk.c) || null;
+  });
+  return found;
+}
+
+function variantDot(o) {
+  const c = orderColor(o);
+  if (!c) return '';
+  const im = (c.imgs && c.imgs[0] && c.imgs[0].thumb) || '';
+  const st = im
+    ? `background-image:url(${im});background-size:cover;background-position:center;`
+    : colorStyle(c.hex, c.label);
+  return `<span class="dot" style="${st}"></span>`;
+}
+
+// Фото в таблиці на всю ширину колонки: обраний колір, інакше головне фото товару
+function orderPic(o) {
+  const p = products.find(x => x.id === o.productId);
+  const c = orderColor(o);
+  const ci = c && c.imgs && c.imgs[0];
+  const src = (ci && ci.thumb) || (p && p.thumb) || '';
+  if (!src) {
+    return c && c.hex
+      ? `<span class="opic swatchonly" style="${colorStyle(c.hex, c.label)}"></span>` : '';
+  }
+  // оригінал підвантажиться з Drive, коли рядок потрапить на екран
+  let lazy = '', click = '';
+  if (ci && ci.photoId) {
+    lazy = `data-photo="${ci.photoId}" data-prod="${o.productId}"`;
+    click = `openChoicePhoto('${o.productId}','${ci.photoId}','${esc(ci.thumb || '')}')`;
+  } else if (p && p.photoId) {
+    lazy = `data-pid="${p.id}"`;
+    click = `openPhoto('${p.id}')`;
+  }
+  const key = (ci && ci.photoId) || (p && p.id) || '';
+  return `<img class="opic${click ? ' zoom' : ''}" alt="" src="${photoCache[key] || src}"
+    ${photoCache[key] ? '' : lazy} ${click ? `onclick="${click}"` : ''}
+    title="${esc(c ? c.label : (p ? p.name : ''))}">`;
+}
+
+/* ══════════ ФОРМА ЗАМОВЛЕННЯ ══════════ */
+function openOrder(id) {
+  const o = id ? orders.find(x => x.id === id) : null;
+  const prodOpts = `<option value="">${t('manualEntry')}</option>` +
+    products.map(p => `<option value="${p.id}" data-find="${esc(skuHaystack(p))}" ${
+      o && o.productId === p.id ? 'selected' : ''}>${esc(p.name)}${p.sku ? ' · ' + esc(p.sku) : ''}</option>`).join('');
+  modal(`<h2><i class="ti ti-${o ? 'pencil' : 'plus'}"></i> ${o ? t('editOrder') : t('newOrder')}</h2>
+    <div class="row">
+      <div class="field"><label>${t('buyerName')} *</label><input id="f-buyer" value="${o ? esc(o.buyer) : ''}" placeholder="John Smith"></div>
+      <div class="field" style="max-width:110px;"><label>${t('qty')}</label><input id="f-qty" type="number" min="1" oninput="showShip()" value="${o ? (+o.qty || 1) : 1}"></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>${t('colPrice')}</label><input id="f-price" type="number" min="0" step="0.01" oninput="showConv()" value="${o && o.price !== '' ? o.price : ''}"></div>
+      <div class="field" style="max-width:120px;"><label>${t('currency')}</label><select id="f-cur" onchange="curChanged()">${curOpts(o ? o.currency : myCur())}</select></div>
+    </div>
+    <div id="conv-hint" style="font-size:11px;color:var(--text3);margin:-6px 0 1rem;"></div>
+    <div class="sect">${t('secItem')}</div>
+    <div class="field"><label>${t('fromCatalog')}</label>
+      <input id="f-psearch" class="psearch" placeholder="${t('findBySku')}" oninput="filterProdOpts()"
+             autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();}">
+      <div id="f-pfound" class="pfound"></div>
+      <select id="f-product" onchange="onProductPick()">${prodOpts}</select></div>
+    <div id="variant-wrap"></div>
+    <div class="field" id="custom-wrap"><label>${t('manualName')} *</label>
+      <input id="f-custom" value="${o && !o.productId ? esc(o.table) : ''}" placeholder="${t('manualPh')}"></div>
+
+    <div class="sect">${t('secShipping')}</div>
+    <div class="field"><label>${t('street')}</label><input id="f-street" value="${o ? esc(o.street || '') : ''}" placeholder="534 Commonwealth Ave, APT 5A"></div>
+    <div class="row">
+      <div class="field"><label>${t('city')}</label><input id="f-city" value="${o ? esc(o.city || '') : ''}" placeholder="Boston"></div>
+      <div class="field"><label>${t('state')}</label><input id="f-state" value="${o ? esc(o.state || '') : ''}" placeholder="MA"></div>
+      <div class="field"><label>${t('zip')}</label><input id="f-zip" value="${o ? esc(o.zip || '') : ''}" placeholder="02215"></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>${t('country')}</label>
+        <select id="f-country" onchange="showShip()">${countryOpts(o ? o.country : 'US')}</select>
+        <div id="ship-hint" style="font-size:11px;color:var(--text3);margin-top:4px;"></div></div>
+      <div class="field"><label>${t('phone')}</label><input id="f-phone" value="${o ? esc(o.phone || '') : ''}" placeholder="+1 (669) 238-1623"></div>
+      <div class="field"><label>${t('buyerEmail')}</label>
+        <input id="f-bmail" type="email" value="${o ? esc(o.buyerEmail || '') : ''}" placeholder="buyer@mail.com"></div>
+    </div>
+
+    <div class="sect">${t('secStatus')}</div>
+    <div class="row">
+      <div class="field"><label>${t('colPayment')}</label>${ME.admin
+        ? `<select id="f-pay">
+             <option value="unpaid" ${o && o.payment === 'unpaid' ? 'selected' : ''}>${t('unpaid')}</option>
+             <option value="paid" ${o && o.payment === 'paid' ? 'selected' : ''}>${t('paid')}</option></select>`
+        : `<div style="padding:9px 0;">${payBadge(o || { payment: 'unpaid' })}</div>
+           <input type="hidden" id="f-pay" value="${o ? esc(o.payment) : 'unpaid'}">`}</div>
+      <div class="field"><label>${t('colStatus')}</label><select id="f-status">${statusOpts(o ? o.status : 'new')}</select></div>
+    </div>
+    <div class="field"><label>${t('note')}</label><textarea id="f-note" placeholder="${t('notePh')}">${o ? esc(o.note || '') : ''}</textarea></div>
+    <div class="field"><label>${t('vatLbl')}</label>
+      <textarea id="f-vat" rows="3" placeholder="${t('vatPh')}">${o ? esc(o.vat || '') : ''}</textarea>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px;">${t('vatHint')}</div>
+    </div>
+
+    ${visBlock(o ? o.hiddenFor : [])}
+
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal()">${t('cancel')}</button>
+      <button class="btn primary" onclick="saveOrder(${o ? `'${o.id}'` : 'null'})" id="save-btn">${t('save')}</button>
+    </div>`);
+  onProductPick(o ? o.picks : null);
+  showConv();
+}
+
+// Підказка з конвертацією під полем ціни
+function showConv() {
+  const el = $('conv-hint');
+  if (!el) return;
+  el.innerHTML = '';          // у замовленнях конвертацію не показуємо — курси є в шапці
+}
+
+
+function statusOpts(cur) {
+  return ['new','pending','shipped'].map(s =>
+    `<option value="${s}" ${cur === s ? 'selected' : ''}>${t(ST_KEYS[s])}</option>`).join('');
+}
+
+function onProductPick(preset) {
+  const p = products.find(x => x.id === val('f-product'));
+  const vw = $('variant-wrap'), cw = $('custom-wrap');
+  if (!p) { vw.innerHTML = ''; cw.classList.remove('hide'); return; }
+  cw.classList.add('hide');
+  const groups = p.options || [];
+  if (!groups.length) {
+    vw.innerHTML = `<div style="font-size:12px;color:var(--text3);margin-bottom:1rem;">${t('noVariants')}</div>`;
+    basePrice(p);
+    showShip();
+    return;
+  }
+  const picks = {};
+  (preset || []).forEach(x => { picks[x.g] = x.c; });
+
+  vw.innerHTML = groups.map(g => {
+    const cur = picks[g.id] || '';
+    const req = g.req !== false;
+    const gp = g.price !== '' && g.price != null
+      ? ` <span class="gpx">${sym(g.currency)}${fmtNum(g.price)}</span>` : '';
+    const lab = `<label>${esc(g.name)} ${req ? '*' : `<span class="opt">${t('optGroup')}</span>`}${gp}</label>`;
+    if (g.kind === 'color') {
+      return `<div class="opick" data-g="${g.id}" data-req="${req ? 1 : 0}">${lab}
+        <div class="swatches">${req ? '' : `
+          <div class="swatch none${cur ? '' : ' on'}" data-c="" onclick="pickChoice(this)">
+            <div class="chipc none"></div>
+            <div class="nm">${t('noPick')}</div>
+          </div>`}${g.choices.map(c => `
+          <div class="swatch${cur === c.id ? ' on' : ''}" data-c="${c.id}" onclick="pickChoice(this)">
+            <div class="chipc" style="${c.imgs && c.imgs[0] && c.imgs[0].thumb
+              ? `background-image:url(${c.imgs[0].thumb});background-size:cover;background-position:center;`
+              : colorStyle(c.hex, c.label)}"></div>
+            <div class="nm">${esc(c.label)}</div>
+            ${c.sku ? `<div class="fin mono">${esc(c.sku)}</div>` : ''}
+          </div>`).join('')}</div>
+        <div class="ogal"></div></div>`;
+    }
+    return `<div class="opick" data-g="${g.id}" data-req="${req ? 1 : 0}">${lab}
+      <select class="osel" onchange="pickSel(this)">
+        <option value="">${req ? t('selectOption') : t('noPick')}</option>
+        ${g.choices.map(c => `<option value="${c.id}" ${cur === c.id ? 'selected' : ''}>${esc(c.label)}</option>`).join('')}
+      </select></div>`;
+  }).join('');
+  applyPicks();
+  showShip();
+}
+
+/* Пошук товару у формі замовлення — за назвою, категорією та SKU (товару й варіанта) */
+function filterProdOpts() {
+  const q = val('f-psearch').trim().toLowerCase();
+  const sel = $('f-product'), hint = $('f-pfound');
+  const opts = [...sel.options].slice(1);          // крім «вручну»
+  let shown = 0, only = null;
+  opts.forEach(op => {
+    const ok = !q || (op.dataset.find || '').indexOf(q) > -1;
+    op.hidden = !ok;
+    op.disabled = !ok;
+    if (ok) { shown++; only = op; }
+  });
+  if (!q) { hint.textContent = ''; return; }
+  hint.textContent = shown ? t('found', { n: shown }) : t('foundNone');
+  hint.className = 'pfound' + (shown ? '' : ' none');
+  if (shown === 1 && sel.value !== only.value) {
+    sel.value = only.value;
+    onProductPick();
+  }
+  if (shown >= 1) pickBySku(q);
+}
+
+// Якщо введене — SKU варіанта, одразу позначаємо цей варіант
+function pickBySku(q) {
+  const p = products.find(x => x.id === val('f-product'));
+  if (!p) return;
+  (p.options || []).forEach(g => (g.choices || []).forEach(c => {
+    if (!c.sku || c.sku.toLowerCase() !== q) return;
+    const box = document.querySelector(`#variant-wrap .opick[data-g="${g.id}"]`);
+    if (!box) return;
+    const sel = box.querySelector('.osel');
+    if (sel) { sel.value = c.id; }
+    else {
+      box.querySelectorAll('.swatch').forEach(x => x.classList.toggle('on', x.dataset.c === c.id));
+    }
+    applyPicks();
+  }));
+}
+
+// Скільки коштує доставка обраного товару в обрану країну
+function showShip() {
+  const el = $('ship-hint');
+  if (!el) return;
+  const p = products.find(x => x.id === val('f-product'));
+  const cc = val('f-country');
+  const s = p ? shipFor(p, cc) : null;
+  if (!s) { el.textContent = ''; return; }
+  const qty = Math.max(1, +val('f-qty') || 1);
+  const total = (+s.price || 0) * qty;
+  el.textContent = t('shipFor', { c: cname(cc), p: sym(s.currency) + fmtNum(total) });
+}
+
+// Зміна валюти: для товару без варіантів підставляємо ціну в новій валюті
+function curChanged() {
+  const p = products.find(x => x.id === val('f-product'));
+  if (p && !(p.options || []).length) basePrice(p);
+  showConv();
+}
+
+// Ціна товару без варіантів: беремо ту валюту, що вибрана у формі
+function basePrice(p) {
+  if (!$('f-price')) return;
+  const pu = p.priceUsd !== '' && p.priceUsd != null && !isNaN(+p.priceUsd) ? +p.priceUsd : null;
+  const pe = p.priceEur !== '' && p.priceEur != null && !isNaN(+p.priceEur) ? +p.priceEur : null;
+  if (pu === null && pe === null) return;
+  const want = val('f-cur') === 'EUR' ? 'EUR' : 'USD';
+  if (want === 'EUR' && pe !== null)      { $('f-price').value = pe; $('f-cur').value = 'EUR'; }
+  else if (want === 'USD' && pu !== null) { $('f-price').value = pu; $('f-cur').value = 'USD'; }
+  else if (pu !== null)                   { $('f-price').value = pu; $('f-cur').value = 'USD'; }
+  else                                    { $('f-price').value = pe; $('f-cur').value = 'EUR'; }
+  showConv();
+}
+
+function pickChoice(el) {
+  el.closest('.opick').querySelectorAll('.swatch').forEach(x => x.classList.remove('on'));
+  el.classList.add('on');
+  applyPicks();
+}
+function pickSel() { applyPicks(); }
+
+// Поточний вибір по всіх групах
+function currentPicks() {
+  const p = products.find(x => x.id === val('f-product'));
+  if (!p) return [];
+  return [...document.querySelectorAll('#variant-wrap .opick')].map(box => {
+    const gid = box.dataset.g;
+    const g = (p.options || []).find(x => x.id === gid);
+    const sel = box.querySelector('.osel');
+    const cid = sel ? sel.value : (box.querySelector('.swatch.on') || {}).dataset?.c || '';
+    const c = g ? g.choices.find(x => x.id === cid) : null;
+    return { g: gid, c: cid, req: box.dataset.req !== '0',
+             gname: g ? g.name : '', label: c ? c.label : '', choice: c };
+  });
+}
+
+// Галерея фото обраного кольору + ціна з опції
+function applyPicks() {
+  const picks = currentPicks();
+  picks.forEach(pk => {
+    const box = document.querySelector(`#variant-wrap .opick[data-g="${pk.g}"]`);
+    const gal = box && box.querySelector('.ogal');
+    if (!gal) return;
+    const imgs = (pk.choice && pk.choice.imgs) || [];
+    gal.innerHTML = imgs.map(im => `<div class="g">
+      <span class="pic" style="background-image:url(${im.thumb || ''})"
+        onclick="openChoicePhoto('${val('f-product')}','${im.photoId || ''}','${esc(im.thumb || '')}')"></span>
+      ${im.cap ? `<div class="cap">${esc(im.cap)}</div>` : ''}</div>`).join('');
+  });
+  // ціну задає остання обрана група, в якої вона вказана
+  const prod = products.find(x => x.id === val('f-product'));
+  let price = null, cur = myCur();
+  picks.forEach(pk => {
+    if (!pk.c) return;
+    const g = prod && (prod.options || []).find(x => x.id === pk.g);
+    if (g && g.price !== '' && g.price != null) { price = g.price; cur = g.currency || 'USD'; }
+  });
+  if (price !== null && $('f-price')) {
+    $('f-price').value = price;
+    $('f-cur').value = cur;
+    showConv();
+  }
+}
+
+async function openChoicePhoto(prodId, photoId, thumb) {
+  modal(`<h2>${t('mainPhoto')}</h2>
+    <img class="photo-big" src="${thumb}" id="big-photo" alt="">
+    <div class="modal-footer"><button class="btn" onclick="closeModal()">${t('close')}</button></div>`);
+  if (!photoId) return;
+  const res = await api('getChoicePhoto', { id: prodId, photoId });
+  const el = $('big-photo');
+  if (el && res && !res.error) el.src = 'data:' + res.mimeType + ';base64,' + res.base64;
+}
+
+async function saveOrder(id) {
+  const buyer = val('f-buyer').trim();
+  const pid = val('f-product');
+  const p = products.find(x => x.id === pid);
+  let table = '', picks = [];
+  if (p) {
+    picks = currentPicks();
+    if (picks.some(x => x.req && !x.c)) { toast(t('pickVariant'), 'error'); return; }
+    picks = picks.filter(x => x.c);                       // не обрані необов'язкові групи пропускаємо
+    const txt = picks.map(x => x.label).filter(Boolean).join(', ');
+    table = p.name + (txt ? ' — ' + txt : '');
+    picks = picks.map(x => ({ g: x.g, c: x.c, gname: x.gname, label: x.label }));
+  } else table = val('f-custom').trim();
+  if (!buyer || !table) { toast(t('needBuyerItem'), 'error'); return; }
+
+  const cs = $('f-country');
+  const vat = val('f-vat').trim(), buyerEmail = val('f-bmail').trim();
+  const note = val('f-note').trim();
+  const data = { buyer, table, vat, buyerEmail, productId: pid, variantId: '', picks, qty: val('f-qty') || 1,
+                 street: val('f-street').trim(), city: val('f-city').trim(),
+                 state: val('f-state').trim(), zip: val('f-zip').trim(),
+                 phone: val('f-phone').trim(),
+                 country: cs.value, countryLabel: COUNTRIES[cs.value] ? COUNTRIES[cs.value][2] : cs.value,
+                 price: val('f-price'), currency: val('f-cur'),
+                 payment: val('f-pay'), status: val('f-status'), note, hiddenFor: pickedHidden() };
+  busy('save-btn');
+  const res = id ? await api('updateOrder', Object.assign({ id }, data)) : await api('addOrder', data);
+  if (res && !res.error) { toast(id ? t('saved') : t('orderAdded')); closeModal(); loadAll(); }
+  else { toast(errMsg(res && res.error), 'error'); unbusy('save-btn', t('save')); }
+}
+
+async function markPaid(id) {
+  if (!ME.admin) return;                      // оплату позначає лише адміністратор
+  const o = orders.find(x => x.id === id);
+  const data = { id, payment: 'paid' };
+  if (!o || o.status === 'new') data.status = 'pending';   // оплачено → очікує відправки
+  const res = await api('updateOrder', data);
+  if (res && !res.error) { toast(t('markedPaid')); loadAll(); } else toast(errMsg(res && res.error), 'error');
+}
+
+function openStatus(id) {
+  const o = orders.find(x => x.id === id);
+  modal(`<h2><i class="ti ti-package"></i> ${t('colStatus')} — ${esc(o.buyer)}</h2>
+    <div class="field"><label>${t('colStatus')}</label><select id="f-st">${statusOpts(o.status)}</select></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal()">${t('cancel')}</button>
+      <button class="btn primary" id="save-btn" onclick="saveStatus('${id}')">${t('save')}</button></div>`);
+}
+async function saveStatus(id) {
+  busy('save-btn');
+  const res = await api('setStatus', { id, status: val('f-st') });
+  if (res && !res.error) { toast(t('statusUpdated')); closeModal(); loadAll(); }
+  else { toast(errMsg(res && res.error), 'error'); unbusy('save-btn', t('save')); }
+}
+
+function openTrack(id) {
+  const o = orders.find(x => x.id === id);
+  modal(`<h2><i class="ti ti-truck"></i> ${t('trackNo')} — ${esc(o.buyer)}</h2>
+    <div class="row">
+      <div class="field" style="max-width:150px;"><label>${t('carrier')}</label><select id="f-carrier">
+        <option value="">${t('notSet')}</option>
+        ${Object.keys(CARRIERS).map(k => `<option value="${k}" ${o.carrier === k ? 'selected' : ''}>${CARRIERS[k]}</option>`).join('')}
+      </select></div>
+      <div class="field"><label>${t('trackNo')} 1</label><input id="f-track" class="mono" value="${esc(o.track || '')}" placeholder="1Z999AA10123456784"></div>
+    </div>
+    <div class="row">
+      <div class="field" style="max-width:150px;"><label>${t('carrier')}</label><select id="f-carrier2">
+        <option value="">${t('notSet')}</option>
+        ${Object.keys(CARRIERS).map(k => `<option value="${k}" ${o.carrier2 === k ? 'selected' : ''}>${CARRIERS[k]}</option>`).join('')}
+      </select></div>
+      <div class="field"><label>${t('trackNo')} 2</label><input id="f-track2" class="mono" value="${esc(o.track2 || '')}" placeholder="${t('optional')}"></div>
+    </div>
+    <div class="field"><label>${t('colStatus')}</label><select id="f-st">${statusOpts(o.status)}</select></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal()">${t('cancel')}</button>
+      <button class="btn primary" id="save-btn" onclick="saveTrack('${id}')">${t('save')}</button></div>`);
+}
+async function saveTrack(id) {
+  busy('save-btn');
+  const res = await api('setTrack', { id, track: val('f-track').trim(), carrier: val('f-carrier'),
+    track2: val('f-track2').trim(), carrier2: val('f-carrier2'), status: val('f-st') });
+  if (res && !res.error) { toast(t('saved')); closeModal(); loadAll(); }
+  else { toast(errMsg(res && res.error), 'error'); unbusy('save-btn', t('save')); }
+}
+
+function delOrder(id, buyer) {
+  modal(`<h2>${t('deleteOrderQ')}</h2>
+    <p style="font-size:14px;color:var(--text2);margin-bottom:1.5rem;">${esc(buyer)}</p>
+    <div class="modal-footer"><button class="btn" onclick="closeModal()">${t('cancel')}</button>
+      <button class="btn danger" id="save-btn" onclick="doDelOrder('${id}')"><i class="ti ti-trash"></i> ${t('delete')}</button></div>`);
+}
+async function doDelOrder(id) {
+  busy('save-btn');
+  const res = await api('deleteOrder', { id });
+  if (res && !res.error) { toast(t('orderDeleted')); closeModal(); loadAll(); }
+  else { toast(errMsg(res && res.error), 'error'); unbusy('save-btn', t('delete')); }
+}
+
+/* ══════════ ПЕРЕГЛЯД ══════════ */
+// Адреса доставки окремими рядками; якщо полів немає — старий текст із примітки
+function addrRows(o) {
+  const row = (lbl, v) => v
+    ? `<tr><td style="color:var(--text2);padding:6px 0;">${lbl}</td><td>${esc(v)}</td></tr>` : '';
+  const has = o.street || o.city || o.state || o.zip || o.phone;
+  if (!has) return '';
+  const name = row(t('colBuyer'), o.buyer);
+  return `<tr><td colspan="2" style="padding:10px 0 2px;font-size:11px;letter-spacing:0.06em;
+      text-transform:uppercase;color:var(--text3);">${t('secShipping')}
+      <button class="btn xs" style="margin-left:8px;" onclick="copyAddr('${o.id}')">
+        <i class="ti ti-copy"></i> ${t('copy')}</button></td></tr>` +
+    name +
+    row(t('street'), o.street) +
+    row(t('city'), o.city) +
+    row(t('state'), o.state) +
+    row(t('zip'), o.zip) +
+    row(t('country'), cname(o.country)) +
+    row(t('phone'), o.phone);
+}
+
+// Адреса одним блоком — зручно вставити в кабінет перевізника
+function addrText(o) {
+  return [o.buyer, o.street,
+    [o.zip, o.city].filter(Boolean).join(' '),
+    o.state, cname(o.country), o.phone]
+    .map(x => String(x || '').trim()).filter(Boolean).join('\n');
+}
+
+function copyAddr(id) {
+  const o = orders.find(x => x.id === id);
+  if (!o) return;
+  const txt = addrText(o);
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(() => toast(t('copied')), () => {});
+  else {
+    const ta = document.createElement('textarea');
+    ta.value = txt; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); toast(t('copied')); } catch (e) {}
+    ta.remove();
+  }
+}
+
+function openView(id) {
+  const o = orders.find(x => x.id === id);
+  const c = orderColor(o);
+  const cs = (o.comments || []).length
+    ? o.comments.map(c => `<div class="comment"><span class="comment-author">${esc(c.company || c.user)}</span>
+        <span class="comment-text">${esc(c.text)}</span><span class="comment-time">${esc(c.time)}</span></div>`).join('')
+    : `<div style="font-size:12px;color:var(--text3);padding:8px 0;">${t('noComments')}</div>`;
+  modal(`<h2>${esc(o.buyer)}</h2>
+    <table style="font-size:13px;">
+      <tr><td style="color:var(--text2);padding:6px 0;width:130px;">${t('colItem')}</td>
+        <td>${prodThumb(o)}${variantDot(o)}${esc(o.table)}</td></tr>
+      ${c ? `<tr><td style="color:var(--text2);padding:6px 0;">${t('color')}</td><td><span class="dot lg" style="${colorStyle(c.hex, c.label)}"></span>${esc(c.label)}</td></tr>` : ''}
+      ${(o.picks || []).map(pk => `<tr><td style="color:var(--text2);padding:6px 0;">${esc(pk.gname || '')}</td><td>${esc(pk.label || '')}</td></tr>`).join('')}
+      <tr><td style="color:var(--text2);padding:6px 0;">${t('qty')}</td><td>${+o.qty || 1}</td></tr>
+      <tr><td style="color:var(--text2);padding:6px 0;">${t('colPrice')}</td><td>${money(o.price, o.currency)}</td></tr>
+      ${o.price !== '' && +o.qty > 1 ? `<tr><td style="color:var(--text2);padding:6px 0;">${t('sum')}</td><td>${money(+o.price * (+o.qty || 1), o.currency)}</td></tr>` : ''}
+      <tr><td style="color:var(--text2);padding:6px 0;">${t('colCountry')}</td><td>${flag(o.country)} ${esc(cname(o.country))}</td></tr>
+      <tr><td style="color:var(--text2);padding:6px 0;">${t('colPayment')}</td><td>${payBadge(o)}</td></tr>
+      <tr><td style="color:var(--text2);padding:6px 0;">${t('colStatus')}</td><td>${stBadge(o)}</td></tr>
+      <tr><td style="color:var(--text2);padding:6px 0;">${t('colTrack')}</td><td class="mono">${esc(o.track || '—')}${
+        o.track2 ? '<br>' + esc(o.track2) : ''}</td></tr>
+      ${addrRows(o)}
+      ${o.note ? `<tr><td style="color:var(--text2);padding:6px 0;vertical-align:top;">${t('note')}</td><td style="white-space:pre-line;">${esc(o.note)}</td></tr>` : ''}
+      ${o.buyerEmail ? `<tr><td style="color:var(--text2);padding:6px 0;">${t('buyerEmail')}</td><td><a href="mailto:${esc(o.buyerEmail)}" style="color:var(--info-text);text-decoration:none;">${esc(o.buyerEmail)}</a></td></tr>` : ''}
+      ${o.vat ? `<tr><td style="color:var(--text2);padding:6px 0;vertical-align:top;">VAT</td><td style="white-space:pre-line;">${esc(o.vat)}</td></tr>` : ''}
+      ${ME.admin && (o.hiddenFor || []).length ? `<tr><td style="color:var(--text2);padding:6px 0;">${t('whoSees')}</td><td style="color:var(--warn-text);">${t('hiddenFrom', { r: o.hiddenFor.map(pName).join(', ') })}</td></tr>` : ''}
+      <tr><td style="color:var(--text2);padding:6px 0;">${t('addedOn')}</td><td>${fmtDateTime(o.created)}${o.createdBy ? ' · ' + esc(o.createdBy) : ''}</td></tr>
+    </table>
+    <div class="sect">💬 ${t('comments')}</div>
+    <div id="comments-list">${cs}</div>
+    <div style="display:flex;gap:8px;margin-top:8px;">
+      <input id="comment-input" placeholder="${t('commentPh')}" style="flex:1;padding:7px 10px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:13px;"
+        onkeydown="if(event.key==='Enter')addComment('${id}')">
+      <button class="btn primary" onclick="addComment('${id}')"><i class="ti ti-send"></i></button>
+    </div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal()">${t('close')}</button></div>`);
+}
+
+async function addComment(id) {
+  const inp = $('comment-input'), text = inp.value.trim();
+  if (!text) return;
+  const res = await api('addComment', { id, text });
+  if (res && !res.error) {
+    inp.value = '';
+    $('comments-list').innerHTML = res.comments.map(c => `<div class="comment">
+      <span class="comment-author">${esc(c.company || c.user)}</span><span class="comment-text">${esc(c.text)}</span>
+      <span class="comment-time">${esc(c.time)}</span></div>`).join('');
+    const o = orders.find(x => x.id === id);
+    if (o) o.comments = res.comments;
+  } else toast(errMsg(res && res.error), 'error');
+}
+
+/* ══════════ ФАЙЛИ ЗАМОВЛЕНЬ ══════════ */
+function openDocs(id) {
+  const o = orders.find(x => x.id === id);
+  modal(`<h2><i class="ti ti-paperclip"></i> ${t('filesFor')} — ${esc(o.buyer)}</h2>
+    <div class="field"><label>${t('docType')}</label><select id="f-dtype">
+      <option value="label">${t('dLabel')}</option>
+      <option value="payment">${t('dPayment')}</option>
+      <option value="invoice">${t('dInvoice')}</option>
+      <option value="other">${t('dOther')}</option></select></div>
+    <div class="file-zone" onclick="document.getElementById('f-file').click()">
+      <i class="ti ti-upload" style="font-size:24px;display:block;margin:0 auto 6px;"></i>
+      ${t('dropHere')}<br><span style="font-size:11px;">${t('upTo')}</span></div>
+    <input type="file" id="f-file" accept=".pdf,.png,.jpg,.jpeg" style="display:none" onchange="uploadDoc('${id}')">
+    <div id="docs-list" style="margin-top:10px;">${docsList(o.docs || [], id)}</div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal()">${t('close')}</button></div>`);
+}
+
+function docsList(docs, id) {
+  if (!docs.length) return `<div style="color:var(--text3);font-size:13px;text-align:center;padding:1rem;">${t('noFiles')}</div>`;
+  const LB = { label:t('dLabel'), payment:t('dPayment'), invoice:t('dInvoice'), other:t('dOther') };
+  const IC = { label:'ti-package', payment:'ti-credit-card', invoice:'ti-file-invoice', other:'ti-file' };
+  return docs.map(d => `<div class="attachment">
+    <i class="ti ${IC[d.type] || 'ti-file'}" style="font-size:18px;flex-shrink:0;"></i>
+    <div style="flex:1;min-width:0;">
+      <div style="font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(d.name)}</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:2px;">${LB[d.type] || d.type} · ${esc(d.date)} · ${esc(d.by || '')}</div>
+    </div>
+    <button class="icon-btn" onclick="viewDoc('${id}','${d.id}')" title="${t('preview')}"><i class="ti ti-eye" style="font-size:13px;"></i></button>
+    <button class="icon-btn" onclick="getDoc('${id}','${d.id}')" title="${t('download')}"><i class="ti ti-download" style="font-size:13px;"></i></button>
+    <button class="icon-btn" onclick="delDoc('${id}','${d.id}')" title="${t('delete')}"><i class="ti ti-trash" style="font-size:13px;"></i></button>
+  </div>`).join('');
+}
+
+async function uploadDoc(id) {
+  const f = $('f-file').files[0];
+  if (!f) return;
+  if (f.size > 25 * 1024 * 1024) { toast(t('fileTooBig'), 'error'); return; }
+  toast(t('uploading'));
+  const b64 = await toB64(f);
+  const res = await api('addDoc', { orderId: id, name: f.name, type: val('f-dtype'),
+                                    base64: b64.split(',')[1], mimeType: f.type });
+  if (res && !res.error) {
+    toast(t('fileSaved'));
+    $('docs-list').innerHTML = docsList(res.docs, id);
+    const o = orders.find(x => x.id === id); if (o) o.docs = res.docs;
+    renderOrders();
+  } else toast(errMsg(res && res.error), 'error');
+}
+
+async function getDoc(orderId, fileId) {
+  toast(t('preparing'));
+  const res = await api('getDoc', { orderId, fileId });
+  if (!res || res.error) { toast(errMsg(res && res.error), 'error'); return; }
+  const url = URL.createObjectURL(b64Blob(res.base64, res.mimeType));
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = res.name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
+}
+
+// base64 → Blob, щоб файл відкривався у новій вкладці
+function b64Blob(b64, mime) {
+  const bin = atob(b64), len = bin.length, arr = new Uint8Array(len);
+  for (let i = 0; i < len; i++) arr[i] = bin.charCodeAt(i);
+  return new Blob([arr], { type: mime || 'application/octet-stream' });
+}
+
+// Перегляд файлу в новій вкладці
+async function viewDoc(orderId, fileId) {
+  const w = window.open('', '_blank');          // відкриваємо одразу, поки є дія користувача
+  toast(t('preparing'));
+  const res = await api('getDoc', { orderId, fileId });
+  if (!res || res.error) { if (w) w.close(); toast(errMsg(res && res.error), 'error'); return; }
+  const url = URL.createObjectURL(b64Blob(res.base64, res.mimeType));
+  if (w) w.location.href = url;
+  else window.open(url, '_blank');              // якщо вкладку заблокував браузер
+  setTimeout(() => URL.revokeObjectURL(url), 60000);
+}
+
+async function delDoc(orderId, fileId) {
+  const res = await api('deleteDoc', { orderId, fileId });
+  if (res && !res.error) {
+    $('docs-list').innerHTML = docsList(res.docs, orderId);
+    const o = orders.find(x => x.id === orderId); if (o) o.docs = res.docs;
+    toast(t('fileDeleted')); renderOrders();
+  } else toast(errMsg(res && res.error), 'error');
+}
+
+/* ══════════ ТОВАРИ ══════════ */
+// Ключ категорії товару ('__none__' — без категорії)
+function catKey(p) { return (String(p.category || '').trim()) || '__none__'; }
+
+// Усе, за чим шукаємо товар: назва, категорія, SKU товару й SKU варіантів
+function skuHaystack(p) {
+  const parts = [p.name, p.sku, p.category];
+  (p.options || []).forEach(g => {
+    parts.push(g.name);
+    (g.choices || []).forEach(c => parts.push(c.label, c.sku));
+  });
+  return parts.filter(Boolean).join(' ').toLowerCase();
+}
+
+// Підсвітка збігу
+function hl(txt, q) {
+  const base = esc(txt == null ? '' : txt);
+  if (!q) return base;
+  const safe = esc(q).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  try { return base.replace(new RegExp('(' + safe + ')', 'ig'), '<mark>$1</mark>'); }
+  catch (e) { return base; }
+}
+
+// SKU варіантів, що збігаються з пошуком
+function matchedSkus(p, q) {
+  if (!q) return [];
+  const out = [];
+  (p.options || []).forEach(g => (g.choices || []).forEach(c => {
+    if (c.sku && c.sku.toLowerCase().indexOf(q) > -1) out.push(c.sku);
+  }));
+  return out;
+}
+
+function renderCategories() {
+  const el = $('cat-side');
+  if (!el) return;
+  const map = {};
+  products.forEach(p => { const k = catKey(p); map[k] = (map[k] || 0) + 1; });
+  const keys = Object.keys(map).filter(k => k !== '__none__')
+    .sort((a, b) => a.localeCompare(b, L().locale));
+  if (map['__none__']) keys.push('__none__');
+  if (catFilter !== 'all' && keys.indexOf(catFilter) === -1) catFilter = 'all';
+  el.innerHTML = catItem('all', t('allCategories'), products.length) +
+    keys.map(k => catItem(k, k === '__none__' ? t('noCategory') : k, map[k])).join('');
+}
+
+function catItem(key, label, n) {
+  return `<button class="cat-item${catFilter === key ? ' on' : ''}" data-k="${esc(key)}" onclick="setCat(this.dataset.k)">
+    <span class="nm">${esc(label)}</span><span class="n">${n}</span></button>`;
+}
+
+function setCat(k) { catFilter = k; renderProducts(); }
+
+function renderProducts() {
+  renderCategories();
+  const q = val('p-search').toLowerCase();
+  const list = products
+    .filter(p => catFilter === 'all' || catKey(p) === catFilter)
+    .filter(p => !q || skuHaystack(p).indexOf(q) > -1)
+    .sort((a, b) => ts(b.created) - ts(a.created));   // нові товари — першими
+  toggle('products-empty', !list.length);
+  $('p-count').textContent = t('productsCount', { n: list.length });
+  $('products-body').innerHTML = list.map(p => {
+    const groups = p.options || [];
+    const cols = [];
+    groups.filter(g => g.kind === 'color').forEach(g => g.choices.forEach(c => {
+      if (!cols.some(x => x.n === c.label)) cols.push({ n: c.label, hex: c.hex, im: (c.imgs || [])[0] });
+    }));
+    const other = groups.filter(g => g.kind !== 'color');
+    return `<div class="pcard">
+      <div class="pphoto">${p.thumb
+        ? `<img src="${photoCache[p.id] || p.thumb}" alt="" ${p.photoId && !photoCache[p.id] ? `data-pid="${p.id}"` : ''} onclick="openPhoto('${p.id}')">`
+        : `<span>${t('noPhoto')}</span>`}</div>
+      <div class="pbody">
+        ${p.category ? `<div class="pcat">${hl(p.category, q)}</div>` : ''}
+        <div class="pname">${hl(p.name, q)}</div>
+        <div class="psku">SKU: ${hl(p.sku, q)}</div>
+        ${(() => {
+          const ms = matchedSkus(p, q);
+          return ms.length ? `<div class="pskus">${ms.slice(0, 6).map(x =>
+            `<span class="sk">${hl(x, q)}</span>`).join('')}</div>` : '';
+        })()}
+        ${(p.hiddenFor || []).length
+          ? (ME.admin ? `<div class="phid"><i class="ti ti-eye-off"></i> ${t('hiddenFrom', { r: p.hiddenFor.map(pName).join(', ') })}</div>` : '')
+          : ''}
+        ${cols.length ? `<div class="pvars">
+          ${cols.slice(0, 4).map(c => `<span class="pv"><span class="dot" style="${
+            c.im && c.im.thumb
+              ? `background-image:url(${c.im.thumb});background-size:cover;background-position:center;`
+              : colorStyle(c.hex, c.n)}"></span>${esc(c.n)}</span>`).join('')}
+          ${cols.length > 4 ? `<span class="pv">+${cols.length - 4}</span>` : ''}
+        </div>` : ''}
+        ${p.dims && (p.dims.l || p.dims.w || p.dims.h) ? `<div class="psku">${
+          [p.dims.l, p.dims.w, p.dims.h].filter(Boolean).join(' × ')} ${t('cm')}</div>` : ''}
+        ${other.length ? `<div class="pvars">${other.slice(0, 4).map(g =>
+          `<span class="pv">${esc(g.name)} <b style="color:var(--text)">${g.choices.length}</b></span>`).join('')}</div>` : ''}
+        <div class="pprice">${priceRange(p)}</div>
+      </div>
+      <div class="pacts">
+        <button class="icon-btn" onclick="openProduct('${p.id}')" title="${t('edit')}"><i class="ti ti-pencil"></i></button>
+        <button class="icon-btn" onclick="dupProduct('${p.id}','${esc(p.name)}')" title="${t('duplicate')}"><i class="ti ti-copy"></i></button>
+        <button class="icon-btn" onclick="delProduct('${p.id}','${esc(p.name)}')" title="${t('delete')}"><i class="ti ti-trash"></i></button>
+      </div>
+    </div>`;
+  }).join('');
+  lazyPhotos();
+}
+
+/* ══════════ Повні фото для карток ══════════ */
+const photoCache = {};
+
+function lazyPhotos() {
+  const imgs = [...document.querySelectorAll('#products-body img[data-pid]')];
+  if (!imgs.length) return;
+
+  const load = async el => {
+    if (el.dataset.done) return;
+    el.dataset.done = '1';
+    const id = el.dataset.pid;
+    if (photoCache[id]) { el.src = photoCache[id]; return; }
+    const p = products.find(x => x.id === id);
+    if (!p || !p.photoId) return;
+    const res = await api('getPhoto', { id });
+    if (res && !res.error) {
+      const url = 'data:' + res.mimeType + ';base64,' + res.base64;
+      photoCache[id] = url;
+      el.src = url;
+    }
+  };
+
+  if (!('IntersectionObserver' in window)) { imgs.forEach(load); return; }
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { load(e.target); obs.unobserve(e.target); } });
+  }, { rootMargin: '300px' });
+  imgs.forEach(i => io.observe(i));
+}
+
+// Оригінали фото в таблиці замовлень — коли рядок видно на екрані
+function lazyOrderPhotos() {
+  const imgs = [...document.querySelectorAll('#orders-body img[data-photo], #orders-body img[data-pid]')];
+  if (!imgs.length) return;
+
+  const load = async el => {
+    if (el.dataset.done) return;
+    el.dataset.done = '1';
+    const photoId = el.dataset.photo, prodId = el.dataset.prod, pid = el.dataset.pid;
+    const key = photoId || pid;
+    if (photoCache[key]) { el.src = photoCache[key]; return; }
+    const res = photoId
+      ? await api('getChoicePhoto', { id: prodId, photoId })
+      : await api('getPhoto', { id: pid });
+    if (res && !res.error) {
+      photoCache[key] = 'data:' + res.mimeType + ';base64,' + res.base64;
+      el.src = photoCache[key];
+    }
+  };
+
+  if (!('IntersectionObserver' in window)) { imgs.slice(0, 6).forEach(load); return; }
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => { if (e.isIntersecting) { load(e.target); obs.unobserve(e.target); } });
+  }, { rootMargin: '200px' });
+  imgs.forEach(i => io.observe(i));
+}
+
+// Переведення в гривні за курсом НБУ
+function uahOf(a, cur) {
+  const rate = cur === 'EUR' ? fx.eurUah : fx.usdUah;
+  return rate ? +a * rate : null;
+}
+
+// Діапазон цін товару: валюта зверху, гривні під нею
+function priceRange(p) {
+  const list = [];
+  (p.options || []).forEach(g => {
+    if (g.price !== '' && g.price !== null && g.price !== undefined && !isNaN(+g.price))
+      list.push({ price: +g.price, currency: g.currency === 'EUR' ? 'EUR' : 'USD' });
+  });
+  if (!list.length) {
+    const pu = p.priceUsd !== '' && p.priceUsd != null && !isNaN(+p.priceUsd) ? +p.priceUsd : null;
+    const pe = p.priceEur !== '' && p.priceEur != null && !isNaN(+p.priceEur) ? +p.priceEur : null;
+    if (pu === null && pe === null) return '<span style="color:var(--text3)">—</span>';
+    const main = [pu !== null ? '$' + fmtNum(pu) : '', pe !== null ? '€' + fmtNum(pe) : '']
+      .filter(Boolean).join(' · ');
+    const u = uahOf(pu !== null ? pu : pe, pu !== null ? 'USD' : 'EUR');
+    return `<div style="font-size:16px;font-weight:600;letter-spacing:-0.01em;">${main}</div>` +
+      (u === null ? '' : `<div style="font-size:11px;color:var(--text3);margin-top:1px;">≈ ${fmtNum(Math.round(u))} ₴</div>`);
+  }
+
+  const cc = list[0].currency;
+  if (!list.every(x => x.currency === cc)) return list.map(x => money(x.price, x.currency)).join('<br>');
+
+  const nums = list.map(x => x.price);
+  const lo = Math.min.apply(null, nums), hi = Math.max.apply(null, nums);
+  const one = lo === hi;
+  const main = one ? sym(cc) + fmtNum(lo) : `${sym(cc)}${fmtNum(lo)} – ${sym(cc)}${fmtNum(hi)}`;
+
+  const u1 = uahOf(lo, cc), u2 = uahOf(hi, cc);
+  const sub = u1 === null ? '' :
+    `≈ ${fmtNum(Math.round(u1))}${one ? '' : ' – ' + fmtNum(Math.round(u2))} ₴`;
+
+  return `<div style="font-size:16px;font-weight:600;letter-spacing:-0.01em;">${main}</div>` +
+    (sub ? `<div style="font-size:11px;color:var(--text3);margin-top:1px;">${sub}</div>` : '');
+}
+
+function openProduct(id) {
+  const p = id ? products.find(x => x.id === id) : null;
+  const dm = (p && p.dims) || {};
+  modal(`<h2><i class="ti ti-${p ? 'pencil' : 'plus'}"></i> ${p ? t('editProduct') : t('newProduct')}</h2>
+    <div class="ptabs">
+      <button class="ptab active" data-s="main" onclick="pTab('main')">${t('tabMain')}<span class="pbadge" id="pb-main"></span></button>
+      <button class="ptab" data-s="vars" onclick="pTab('vars')">${t('optionGroups')}<span class="pbadge" id="pb-vars"></span></button>
+      <button class="ptab" data-s="box" onclick="pTab('box')">${t('tabBoxes')}<span class="pbadge" id="pb-box"></span></button>
+    </div>
+
+    <div class="psec" id="ps-main">
+      <div class="row">
+        <div class="field"><label>${t('prodName')} *</label><input id="p-name" value="${p ? esc(p.name) : ''}" placeholder="${t('prodNamePh')}"></div>
+        <div class="field" style="max-width:150px;"><label>SKU</label><input id="p-sku" class="mono" value="${p ? esc(p.sku) : ''}" placeholder="${t('auto')}"></div>
+      </div>
+      <div class="field"><label>${t('category')}</label><input id="p-cat" value="${p ? esc(p.category || '') : ''}" placeholder="${t('categoryPh')}"></div>
+      <div class="field"><label>${t('mainPhoto')}</label>
+        <div class="photo-pick">
+          ${p && p.thumb
+            ? `<img class="photo-prev" id="p-photo-prev" src="${p.thumb}" alt="">`
+            : `<div class="photo-prev empty" id="p-photo-prev">${t('noPhoto')}</div>`}
+          <div>
+            <button class="btn sm" onclick="document.getElementById('p-photo-file').click()"><i class="ti ti-upload"></i> ${t('choose')}</button>
+            <button class="btn sm" onclick="clearPhoto()"><i class="ti ti-x"></i></button>
+            <div style="font-size:11px;color:var(--text3);margin-top:5px;">${t('photoHint')}</div>
+          </div>
+        </div>
+        <input type="hidden" id="p-thumb" value="">
+        <input type="hidden" id="p-full" value="">
+        <input type="hidden" id="p-rmphoto" value="">
+        <input type="file" id="p-photo-file" accept="image/png,image/jpeg,image/webp" style="display:none" onchange="pickPhoto(this)">
+      </div>
+      <div class="row">
+        <div class="field"><label>${t('dimL')}</label><input id="p-l" type="number" min="0" step="0.1" oninput="showDims()" value="${dm.l != null && dm.l !== '' ? dm.l : ''}"></div>
+        <div class="field"><label>${t('dimW')}</label><input id="p-w" type="number" min="0" step="0.1" oninput="showDims()" value="${dm.w != null && dm.w !== '' ? dm.w : ''}"></div>
+        <div class="field"><label>${t('dimH')}</label><input id="p-h" type="number" min="0" step="0.1" oninput="showDims()" value="${dm.h != null && dm.h !== '' ? dm.h : ''}"></div>
+        <div class="field"><label>${t('weight')}</label><input id="p-wt" type="number" min="0" step="0.1" value="${dm.weight != null && dm.weight !== '' ? dm.weight : ''}"></div>
+      </div>
+      <div id="dims-hint" style="font-size:11px;color:var(--text3);margin:-6px 0 1rem;"></div>
+
+      <div class="sect">${t('basePrice')}</div>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:0.7rem;">${t('basePriceHint')}</div>
+      <div class="row">
+        <div class="field" style="max-width:170px;"><label>${t('priceUsd')}</label>
+          <input id="p-usd" type="number" min="0" step="0.01" value="${p && p.priceUsd !== '' && p.priceUsd != null ? p.priceUsd : ''}"></div>
+        <div class="field" style="max-width:170px;"><label>${t('priceEur')}</label>
+          <input id="p-eur" type="number" min="0" step="0.01" value="${p && p.priceEur !== '' && p.priceEur != null ? p.priceEur : ''}"></div>
+      </div>
+
+      <div id="gprice-box" class="hide">
+        <div class="sect">${t('groupPrices')}</div>
+        <div style="font-size:11px;color:var(--text3);margin-bottom:0.7rem;">${t('groupPricesHint')}</div>
+        <div id="gprices"></div>
+      </div>
+      <div class="field"><label>${t('description')}</label><textarea id="p-note">${p ? esc(p.note || '') : ''}</textarea></div>
+      ${visBlock(p ? p.hiddenFor : [])}
+    </div>
+
+    <div class="psec hide" id="ps-vars">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;">
+        <div style="font-size:11px;color:var(--text3);max-width:70%;">${t('optionsHint')}</div>
+        <div style="display:flex;gap:7px;">
+          <button class="btn sm" onclick="resetSkus()"><i class="ti ti-refresh"></i> ${t('resetSku')}</button>
+          <button class="btn sm" onclick="addGroup()"><i class="ti ti-plus"></i> ${t('addGroup')}</button>
+        </div>
+      </div>
+      <div id="vars"></div>
+    </div>
+
+    <div class="psec hide" id="ps-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;">
+        <div style="font-size:11px;color:var(--text3);max-width:70%;">${t('boxesHint')}</div>
+        <button class="btn sm" onclick="addBox()"><i class="ti ti-plus"></i> ${t('addBox')}</button>
+      </div>
+      <div id="boxes"></div>
+
+      <div class="sect" style="margin-top:1.3rem;">${t('shipTitle')}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;">
+        <div style="font-size:11px;color:var(--text3);max-width:70%;">${t('shipHint')}</div>
+        <button class="btn sm" onclick="addShip()"><i class="ti ti-plus"></i> ${t('addShip')}</button>
+      </div>
+      <div id="ships"></div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal()">${t('cancel')}</button>
+      <button class="btn primary" id="save-btn" onclick="saveProduct(${p ? `'${p.id}'` : 'null'})">${t('save')}</button>
+    </div>`);
+  (p ? (p.options || []) : []).forEach(addGroup);
+  renderGPrices();
+  (p ? (p.boxes || []) : []).forEach(addBox);
+  (p ? (p.shipping || []) : []).forEach(addShip);
+  showDims();
+  pCount();
+  $('modal-box').addEventListener('input', pCount);
+  $('modal-box').addEventListener('click', () => setTimeout(pCount, 0));
+}
+
+// Перемикання вкладок усередині картки товару
+function pTab(name) {
+  if (name !== 'main') readGPrices();
+  document.querySelectorAll('.ptab').forEach(b => b.classList.toggle('active', b.dataset.s === name));
+  document.querySelectorAll('.psec').forEach(x => x.classList.toggle('hide', x.id !== 'ps-' + name));
+  if (name === 'main') renderGPrices();
+}
+
+// Скільки даних уже введено на кожній вкладці
+function pCount() {
+  const set = (id, n) => {
+    const el = $(id);
+    if (!el) return;
+    el.textContent = n;
+    el.classList.toggle('on', n > 0);
+  };
+  // Основне: заповнені поля
+  let main = 0;
+  ['p-name','p-cat','p-note','p-l','p-w','p-h','p-wt'].forEach(x => { if (val(x).trim()) main++; });
+  if (val('p-thumb') || ($('p-photo-prev') && $('p-photo-prev').tagName === 'IMG' && !val('p-rmphoto'))) main++;
+  set('pb-main', main);
+
+  // Варіанти: усі варіанти вибору в усіх групах
+  let ch = 0;
+  document.querySelectorAll('#vars .ogroup').forEach(b => {
+    b.querySelectorAll('.ochoice').forEach(r => {
+      const lab = r.querySelector('.c-label');
+      if (lab && lab.value.trim()) ch++;
+    });
+  });
+  set('pb-vars', ch);
+
+  set('pb-box', document.querySelectorAll('#boxes .ochoice').length +
+                document.querySelectorAll('#ships .ochoice').length);
+}
+
+// Габарити в дюймах під полями
+function showDims() {
+  pCount();
+  const el = $('dims-hint');
+  if (!el) return;
+  const l = +val('p-l'), w = +val('p-w'), h = +val('p-h');
+  if (!l && !w && !h) { el.textContent = ''; return; }
+  const inch = v => v ? (v / 2.54).toFixed(1) : '0';
+  el.textContent = `≈ ${inch(l)} × ${inch(w)} × ${inch(h)} ″`;
+}
+
+// Коробки
+function addBox(b) {
+  b = b || { l:'', w:'', h:'', weight:'', cost:'', note:'' };
+  const d = document.createElement('div');
+  d.className = 'ochoice';
+  d.innerHTML = `
+    <input class="b-l" type="number" min="0" step="0.1" style="width:74px;" placeholder="${t('dimL')}" value="${b.l !== '' && b.l != null ? b.l : ''}">
+    <input class="b-w" type="number" min="0" step="0.1" style="width:74px;" placeholder="${t('dimW')}" value="${b.w !== '' && b.w != null ? b.w : ''}">
+    <input class="b-h" type="number" min="0" step="0.1" style="width:74px;" placeholder="${t('dimH')}" value="${b.h !== '' && b.h != null ? b.h : ''}">
+    <input class="b-wt" type="number" min="0" step="0.1" style="width:74px;" placeholder="${t('weight')}" value="${b.weight !== '' && b.weight != null ? b.weight : ''}">
+    <input class="b-cost" type="number" min="0" step="0.01" style="width:84px;" placeholder="${t('boxCost')}" value="${b.cost !== '' && b.cost != null ? b.cost : ''}">
+    <input class="b-note" style="flex:1;min-width:110px;" placeholder="${t('boxNote')}" value="${esc(b.note || '')}">
+    <button class="icon-btn" onclick="this.closest('.ochoice').remove()"><i class="ti ti-x"></i></button>`;
+  $('boxes').appendChild(d);
+}
+
+// Напрямки доставки
+const SHIP_ZONES = () => [['EU', t('zEU')], ['EUR', t('zEUR')], ['ELSE', t('zELSE')]]
+  .concat(Object.keys(COUNTRIES).filter(c => c !== 'other').map(c => [c, cname(c)]));
+
+function shipZoneOpts(sel) {
+  return SHIP_ZONES().map(([v, n]) =>
+    `<option value="${v}" ${v === sel ? 'selected' : ''}>${esc(n)}</option>`).join('');
+}
+
+function addShip(x) {
+  x = x || { zone: 'ELSE', price: '', currency: myCur() };
+  const d = document.createElement('div');
+  d.className = 'ochoice';
+  const num = (v) => v !== '' && v != null ? v : '';
+  d.innerHTML = `
+    <select class="s-zone" style="flex:1;min-width:150px;">${shipZoneOpts(x.zone)}</select>
+    <input class="s-price" type="number" min="0" step="0.01" style="width:120px;"
+      placeholder="${t('shipOne')}" value="${num(x.price)}">
+    <select class="s-cur" style="width:76px;">${curOpts(x.currency)}</select>
+    <button class="icon-btn" onclick="this.closest('.ochoice').remove()"><i class="ti ti-x"></i></button>`;
+  $('ships').appendChild(d);
+}
+
+function collectShips() {
+  return [...document.querySelectorAll('#ships .ochoice')].map(r => ({
+    zone: r.querySelector('.s-zone').value,
+    price: r.querySelector('.s-price').value,
+    currency: r.querySelector('.s-cur').value
+  })).filter(x => x.price !== '');
+}
+
+// Ціна доставки товару в конкретну країну: країна → ЄС / Європа → решта світу
+const EU_CC = ['DE','FR','IT','ES','NL','BE','AT','SE','DK','FI','PL','CZ','SK','HU','RO','PT','GR','IE'];
+function shipFor(p, cc) {
+  const list = (p && p.shipping) || [];
+  const by = z => list.find(x => x.zone === z);
+  return by(cc)
+      || (EU_CC.indexOf(cc) > -1 ? by('EU') : null)
+      || (['GB','CH','NO','UA'].indexOf(cc) > -1 ? by('EUR') : null)
+      || by('ELSE') || null;
+}
+
+function collectBoxes() {
+  return [...document.querySelectorAll('#boxes .ochoice')].map(r => ({
+    l: r.querySelector('.b-l').value, w: r.querySelector('.b-w').value, h: r.querySelector('.b-h').value,
+    weight: r.querySelector('.b-wt').value, cost: r.querySelector('.b-cost').value,
+    note: r.querySelector('.b-note').value.trim()
+  })).filter(b => b.l || b.w || b.h || b.weight);
+}
+
+/* ══════════ Редактор груп опцій ══════════ */
+let gSeq = 0;
+function addGroup(g) {
+  g = g && g.id ? g : { id: '', name: '', kind: 'text', req: true, choices: [] };
+  const box = document.createElement('div');
+  box.className = 'ogroup';
+  box.dataset.key = g.id || ('tmp' + (++gSeq));
+  box.dataset.price = g.price === '' || g.price == null ? '' : g.price;
+  box.dataset.cur = g.currency || myCur();
+  box.innerHTML = `
+    <input type="hidden" class="g-id" value="${esc(g.id)}">
+    <div class="ohead">
+      <input class="g-name" placeholder="${t('groupNamePh')}" value="${esc(g.name)}">
+      <select class="g-kind" onchange="redrawChoices(this)">
+        <option value="text" ${g.kind !== 'color' ? 'selected' : ''}>${t('kindText')}</option>
+        <option value="color" ${g.kind === 'color' ? 'selected' : ''}>${t('kindColor')}</option>
+      </select>
+      <label class="greq"><input type="checkbox" class="g-req" ${g.req === false ? '' : 'checked'}> ${t('reqGroup')}</label>
+      <button class="icon-btn" onclick="this.closest('.ogroup').remove()"><i class="ti ti-trash"></i></button>
+    </div>
+    <div class="g-choices"></div>
+    <button class="btn xs" onclick="addChoice(this.closest('.ogroup'))"><i class="ti ti-plus"></i> ${t('addChoice')}</button>`;
+  $('vars').appendChild(box);
+  (g.choices || []).forEach(c => addChoice(box, c));
+  if (!(g.choices || []).length) addChoice(box);
+}
+
+function redrawChoices(sel) {
+  const box = sel.closest('.ogroup');
+  const list = collectChoices(box);
+  box.querySelector('.g-choices').innerHTML = '';
+  list.forEach(c => addChoice(box, c));
+  if (!list.length) addChoice(box);
+}
+
+function addChoice(box, c) {
+  c = c && (c.id || c.label) ? c : { id: '', sku: '', label: '', hex: '', imgs: [] };
+  const kind = box.querySelector('.g-kind').value;
+  const row = document.createElement('div');
+  row.className = 'ochoice';
+  const labelField = kind === 'color'
+    ? `<select class="c-label" style="flex:2;" onchange="choiceHex(this)">
+         <option value="">${t('colorDash')}</option>
+         ${colors.map(x => `<option value="${esc(x.name)}" data-hex="${x.hex}" ${c.label === x.name ? 'selected' : ''}>${esc(x.name)}</option>`).join('')}
+       </select>
+       <span class="dot lg c-dot" style="${colorStyle(c.hex, c.label)}margin:0;"></span>`
+    : `<input class="c-label" style="flex:2;" placeholder="${t('choicePh')}" value="${esc(c.label)}">`;
+  row.innerHTML = `
+    <input type="hidden" class="c-id" value="${esc(c.id)}">
+    <input type="hidden" class="c-hex" value="${esc(c.hex || '')}">
+    ${labelField}
+    <input class="c-sku mono" style="width:130px;" placeholder="${t('auto')}" value="${esc(c.sku || '')}">
+    <button class="icon-btn" onclick="this.closest('.ochoice').remove()"><i class="ti ti-x"></i></button>
+    <input type="hidden" class="c-imgs" value="${esc(JSON.stringify(c.imgs || []))}">
+    <div class="oimgs"></div>
+    <input type="file" class="c-file" accept="image/png,image/jpeg,image/webp" style="display:none" onchange="pickChoiceImg(this)">`;
+  box.querySelector('.g-choices').appendChild(row);
+  renderChoiceImgs(row);
+}
+
+function choiceHex(sel) {
+  const opt = sel.options[sel.selectedIndex];
+  const hex = opt.getAttribute('data-hex') || '';
+  const row = sel.closest('.ochoice');
+  row.querySelector('.c-hex').value = hex;
+  const dot = row.querySelector('.c-dot');
+  if (dot) dot.style.cssText = colorStyle(hex, sel.value) + 'margin:0;';
+}
+
+function getImgs(row) {
+  try { return JSON.parse(row.querySelector('.c-imgs').value || '[]'); } catch (e) { return []; }
+}
+function setImgs(row, list) {
+  row.querySelector('.c-imgs').value = JSON.stringify(list);
+  renderChoiceImgs(row);
+}
+function renderChoiceImgs(row) {
+  const list = getImgs(row);
+  row.querySelector('.oimgs').innerHTML =
+    list.map((im, i) => `<div class="oimg">
+      <span class="pic" style="background-image:url(${im.thumb || ''})"></span>
+      <input class="cap" value="${esc(im.cap || '')}" placeholder="${t('photoCap')}"
+        onchange="capImg(this, ${i})">
+      <button class="rm" onclick="delImg(this, ${i})">&times;</button>
+    </div>`).join('') +
+    `<div class="oadd" onclick="this.closest('.ochoice').querySelector('.c-file').click()">+</div>`;
+}
+function capImg(inp, i) {
+  const row = inp.closest('.ochoice');
+  const list = getImgs(row);
+  if (list[i]) { list[i].cap = inp.value.trim(); row.querySelector('.c-imgs').value = JSON.stringify(list); }
+}
+function delImg(btn, i) {
+  const row = btn.closest('.ochoice');
+  const list = getImgs(row);
+  list.splice(i, 1);
+  setImgs(row, list);
+}
+function pickChoiceImg(input) {
+  const f = input.files[0];
+  if (!f) return;
+  const row = input.closest('.ochoice');
+  const r = new FileReader();
+  r.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const thumb = fitThumb(img, 260, 200);
+      const full = resizeImg(img, 1400, false, 0.82);
+      if (!thumb) { toast(t('photoTooBig'), 'error'); return; }
+      const list = getImgs(row);
+      if (list.length >= 12) { toast(t('photoLimit'), 'error'); return; }
+      list.push({ thumb, base64: full.split(',')[1], mimeType: 'image/jpeg', cap: '' });
+      setImgs(row, list);
+      input.value = '';
+    };
+    img.onerror = () => toast(t('logoBadRead'), 'error');
+    img.src = r.result;
+  };
+  r.readAsDataURL(f);
+}
+
+// Очистити SKU варіантів — згенеруються заново при збереженні
+function resetSkus() {
+  const list = document.querySelectorAll('#vars .c-sku');
+  list.forEach(i => { i.value = ''; });
+  toast(t('skuReset', { n: list.length }));
+}
+
+function collectChoices(box) {
+  return [...box.querySelectorAll('.ochoice')].map(r => {
+    const lab = r.querySelector('.c-label');
+    return {
+      id: r.querySelector('.c-id').value,
+      sku: r.querySelector('.c-sku').value.trim(),
+      label: lab.value.trim(),
+      hex: r.querySelector('.c-hex').value,
+      imgs: getImgs(r)
+    };
+  }).filter(c => c.label);
+}
+
+function collectGroups() {
+  readGPrices();
+  return [...document.querySelectorAll('#vars .ogroup')].map(b => ({
+    id: b.querySelector('.g-id').value,
+    name: b.querySelector('.g-name').value.trim(),
+    kind: b.querySelector('.g-kind').value,
+    req: b.querySelector('.g-req').checked,
+    price: b.dataset.price || '',
+    currency: b.dataset.cur || myCur(),
+    choices: collectChoices(b)
+  })).filter(g => g.name && g.choices.length);
+}
+
+/* Ціни груп — на вкладці «Основне», під розмірами */
+function renderGPrices() {
+  const wrap = $('gprices'), box = $('gprice-box');
+  if (!wrap) return;
+  readGPrices();
+  const groups = [...document.querySelectorAll('#vars .ogroup')]
+    .filter(b => b.querySelector('.g-name').value.trim());
+  box.classList.remove('hide');
+  if (!groups.length) { wrap.innerHTML = `<div style="font-size:12px;color:var(--text3);">${t('noGroupsYet')}</div>`; return; }
+  wrap.innerHTML = groups.map(b => `<div class="ochoice gprice" data-key="${esc(b.dataset.key)}">
+    <div style="flex:1;min-width:140px;font-size:13px;">${esc(b.querySelector('.g-name').value.trim())}</div>
+    <input class="gp-price" type="number" min="0" step="0.01" style="width:120px;"
+      placeholder="${t('colPrice')}" value="${esc(b.dataset.price || '')}">
+    <select class="gp-cur" style="width:76px;">${curOpts(b.dataset.cur || myCur())}</select>
+  </div>`).join('');
+}
+
+// Запам'ятовує введені ціни назад у групи
+function readGPrices() {
+  document.querySelectorAll('#gprices .gprice').forEach(r => {
+    const b = [...document.querySelectorAll('#vars .ogroup')].find(x => x.dataset.key === r.dataset.key);
+    if (!b) return;
+    b.dataset.price = r.querySelector('.gp-price').value;
+    b.dataset.cur = r.querySelector('.gp-cur').value;
+  });
+}
+
+async function saveProduct(id) {
+  const name = val('p-name').trim();
+  if (!name) { toast(t('needProdName'), 'error'); return; }
+  const data = { name, sku: val('p-sku').trim(), category: val('p-cat').trim(),
+                 priceUsd: val('p-usd'), priceEur: val('p-eur'),
+                 note: val('p-note').trim(), options: collectGroups(),
+                 dims: { l: val('p-l'), w: val('p-w'), h: val('p-h'), weight: val('p-wt') },
+                 boxes: collectBoxes(), shipping: collectShips(), hiddenFor: pickedHidden() };
+  if (val('p-thumb')) data.photo = { thumb: val('p-thumb'), base64: val('p-full').split(',')[1], mimeType: 'image/jpeg' };
+  else if (val('p-rmphoto')) data.removePhoto = true;
+  busy('save-btn');
+  const res = id ? await api('updateProduct', Object.assign({ id }, data)) : await api('addProduct', data);
+  if (res && !res.error) { toast(id ? t('productSaved') : t('productAdded')); closeModal(); loadAll(); }
+  else { toast(errMsg(res && res.error), 'error'); unbusy('save-btn', t('save')); }
+}
+
+// Дублювання товару
+function dupProduct(id, name) {
+  modal(`<h2><i class="ti ti-copy"></i> ${t('duplicateQ')}</h2>
+    <p style="font-size:14px;color:var(--text2);margin-bottom:0.6rem;">${esc(name)}</p>
+    <div style="font-size:12px;color:var(--text3);">${t('duplicateHint')}</div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal()">${t('cancel')}</button>
+      <button class="btn primary" id="save-btn" onclick="doDupProduct('${id}')"><i class="ti ti-copy"></i> ${t('duplicate')}</button></div>`);
+}
+
+async function doDupProduct(id) {
+  busy('save-btn');
+  const res = await api('duplicateProduct', { id });
+  if (res && !res.error) {
+    toast(t('duplicated', { n: res.name }));
+    closeModal();
+    await loadAll();
+    if (res.id) openProduct(res.id);
+  } else { toast(errMsg(res && res.error), 'error'); unbusy('save-btn', t('duplicate')); }
+}
+
+function delProduct(id, name) {
+  modal(`<h2>${t('deleteProductQ')}</h2>
+    <p style="font-size:14px;color:var(--text2);margin-bottom:1.5rem;">${esc(name)}</p>
+    <div class="modal-footer"><button class="btn" onclick="closeModal()">${t('cancel')}</button>
+      <button class="btn danger" id="save-btn" onclick="doDelProduct('${id}')"><i class="ti ti-trash"></i> ${t('delete')}</button></div>`);
+}
+async function doDelProduct(id) {
+  busy('save-btn');
+  const res = await api('deleteProduct', { id });
+  if (res && !res.error) { toast(t('productDeleted')); closeModal(); loadAll(); }
+  else { toast(errMsg(res && res.error), 'error'); unbusy('save-btn', t('delete')); }
+}
+
+/* ══════════ ПАЛІТРА ══════════ */
+function openColors() {
+  modal(`<h2><i class="ti ti-palette"></i> ${t('palette')}
+    <button class="btn sm" style="margin-left:auto;" onclick="addColor()"><i class="ti ti-plus"></i> ${t('btnColor')}</button></h2>
+    <div id="cols"></div>
+    <div style="font-size:11px;color:var(--text3);margin-top:8px;">${t('paletteHint')}</div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal()">${t('cancel')}</button>
+      <button class="btn primary" id="save-btn" onclick="saveColors()">${t('save')}</button></div>`);
+  colors.forEach(addColor);
+  if (!colors.length) addColor();
+}
+
+function addColor(c) {
+  c = c && c.name ? c : { name:'', hex:'#C7A57A', img:'' };
+  const d = document.createElement('div');
+  d.className = 'vrow';
+  d.innerHTML = `
+    <input type="hidden" class="c-hex" value="${c.hex || '#C7A57A'}">
+    <span class="cimg" title="${t('colorPhoto')}" style="${c.img ? `background-image:url(${c.img})` : ''}"
+      onclick="this.parentNode.querySelector('.c-file').click()">${c.img ? '' : '<i class="ti ti-camera"></i>'}</span>
+    <input type="file" class="c-file" accept="image/png,image/jpeg,image/webp" style="display:none" onchange="pickColorImg(this)">
+    <input type="hidden" class="c-img" value="${esc(c.img || '')}">
+    <input class="c-name" style="flex:1;" placeholder="${t('colorName')}" value="${esc(c.name)}">
+    <button class="icon-btn" onclick="clearColorImg(this)" title="${t('clearPhoto')}"><i class="ti ti-photo-off"></i></button>
+    <button class="icon-btn" onclick="this.parentNode.remove()"><i class="ti ti-x"></i></button>`;
+  $('cols').appendChild(d);
+}
+
+// Знімок кольору: квадрат 150px у рядок палітри
+/* ══════════ Обробка зображень ══════════ */
+// Мініатюра під пропорції картки (4:3). Якість підбирається під ліміт комірки таблиці.
+function makeThumb(img, w, h) {
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  const ctx = c.getContext('2d');
+  ctx.imageSmoothingQuality = 'high';
+  const want = w / h, have = img.width / img.height;
+  let sw = img.width, sh = img.height, sx = 0, sy = 0;
+  if (have > want) { sw = img.height * want; sx = (img.width - sw) / 2; }
+  else { sh = img.width / want; sy = (img.height - sh) / 2; }
+  ctx.drawImage(img, sx, sy, sw, sh, 0, 0, w, h);
+  for (let q = 0.86; q >= 0.4; q -= 0.07) {
+    const d = c.toDataURL('image/jpeg', q);
+    if (d.length <= 47000) return d;
+  }
+  return null;
+}
+
+// Мініатюра без обрізання — вписуємо фото цілком
+function fitThumb(img, maxW, maxH) {
+  const k = Math.min(maxW / img.width, maxH / img.height, 1);
+  const c = document.createElement('canvas');
+  c.width = Math.max(1, Math.round(img.width * k));
+  c.height = Math.max(1, Math.round(img.height * k));
+  const ctx = c.getContext('2d');
+  ctx.imageSmoothingQuality = 'high';
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, c.width, c.height);
+  ctx.drawImage(img, 0, 0, c.width, c.height);
+  for (let q = 0.86; q >= 0.4; q -= 0.07) {
+    const d = c.toDataURL('image/jpeg', q);
+    if (d.length <= 47000) return d;
+  }
+  return null;
+}
+
+// Квадратний знімок кольору для палітри
+function makeSwatch(img) {
+  const S = 150, c = document.createElement('canvas');
+  c.width = c.height = S;
+  const ctx = c.getContext('2d');
+  ctx.imageSmoothingQuality = 'high';
+  const side = Math.min(img.width, img.height);
+  ctx.drawImage(img, (img.width - side) / 2, (img.height - side) / 2, side, side, 0, 0, S, S);
+  for (let q = 0.84; q >= 0.4; q -= 0.08) {
+    const d = c.toDataURL('image/jpeg', q);
+    if (d.length <= 45000) return d;
+  }
+  return null;
+}
+
+// Зменшення зі збереженням пропорцій — для оригіналу в Drive
+function resizeImg(img, size, square, q) {
+  const c = document.createElement('canvas');
+  const ctx = c.getContext('2d');
+  ctx.imageSmoothingQuality = 'high';
+  if (square) {
+    c.width = c.height = size;
+    const side = Math.min(img.width, img.height);
+    ctx.drawImage(img, (img.width - side) / 2, (img.height - side) / 2, side, side, 0, 0, size, size);
+  } else {
+    const k = Math.min(1, size / Math.max(img.width, img.height));
+    c.width = Math.round(img.width * k);
+    c.height = Math.round(img.height * k);
+    ctx.drawImage(img, 0, 0, c.width, c.height);
+  }
+  return c.toDataURL('image/jpeg', q);
+}
+
+// Головне фото товару
+function pickPhoto(input) {
+  const f = input.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const thumb = makeThumb(img, 560, 420);
+      if (!thumb) { toast(t('photoTooBig'), 'error'); return; }
+      const full = resizeImg(img, 1400, false, 0.82);
+      $('p-thumb').value = thumb;
+      $('p-full').value = full;
+      $('p-rmphoto').value = '';
+      const prev = $('p-photo-prev');
+      const im = document.createElement('img');
+      im.className = 'photo-prev'; im.id = 'p-photo-prev'; im.src = thumb;
+      prev.replaceWith(im);
+      toast(t('photoAttached', { n: Math.round(thumb.length / 1024) }));
+      if (typeof pCount === 'function') pCount();
+    };
+    img.onerror = () => toast(t('logoBadRead'), 'error');
+    img.src = r.result;
+  };
+  r.readAsDataURL(f);
+}
+
+function clearPhoto() {
+  $('p-thumb').value = ''; $('p-full').value = ''; $('p-rmphoto').value = '1';
+  const prev = $('p-photo-prev');
+  const d = document.createElement('div');
+  d.className = 'photo-prev empty'; d.id = 'p-photo-prev'; d.textContent = t('noPhoto');
+  prev.replaceWith(d);
+  if (typeof pCount === 'function') pCount();
+}
+
+// Повне фото товару у вікні
+async function openPhoto(id) {
+  const p = products.find(x => x.id === id);
+  modal(`<h2>${esc(p ? p.name : '')}</h2>
+    <img class="photo-big" src="${photoCache[id] || (p && p.thumb) || ''}" id="big-photo" alt="">
+    <div class="modal-footer"><button class="btn" onclick="closeModal()">${t('close')}</button></div>`);
+  if (photoCache[id]) return;
+  const res = await api('getPhoto', { id });
+  if (res && !res.error) {
+    photoCache[id] = 'data:' + res.mimeType + ';base64,' + res.base64;
+    const el = $('big-photo');
+    if (el) el.src = photoCache[id];
+  }
+}
+
+function pickColorImg(input) {
+  const f = input.files[0];
+  if (!f) return;
+  const row = input.closest('.vrow');
+  const r = new FileReader();
+  r.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const data = makeSwatch(img);
+      if (!data) { toast(t('photoTooBig'), 'error'); return; }
+      row.querySelector('.c-img').value = data;
+      const box = row.querySelector('.cimg');
+      box.style.backgroundImage = `url(${data})`;
+      box.innerHTML = '';
+      toast(t('photoAttached', { n: Math.round(data.length / 1024) }));
+    };
+    img.onerror = () => toast(t('logoBadRead'), 'error');
+    img.src = r.result;
+  };
+  r.readAsDataURL(f);
+}
+
+function clearColorImg(btn) {
+  const row = btn.closest('.vrow');
+  row.querySelector('.c-img').value = '';
+  const box = row.querySelector('.cimg');
+  box.style.backgroundImage = '';
+  box.innerHTML = '<i class="ti ti-camera"></i>';
+}
+
+async function saveColors() {
+  const list = [...document.querySelectorAll('#cols .vrow')].map(r => ({
+    name: r.querySelector('.c-name').value.trim(),
+    hex: r.querySelector('.c-hex').value,
+    img: r.querySelector('.c-img').value
+  })).filter(c => c.name);
+  busy('save-btn');
+  const withImg = list.filter(c => c.img).length;
+  const res = await api('saveColors', { colors: list });
+  if (res && !res.error) {
+    colors = res.colors;
+    const kept = (res.colors || []).filter(c => c.img).length;
+    if (withImg && kept < withImg) toast(t('photoLost'), 'error');
+    else toast(t('paletteSaved'));
+    closeModal(); loadAll();
+  }
+  else { toast(errMsg(res && res.error), 'error'); unbusy('save-btn', t('save')); }
+}
+
+/* ══════════ ПАРТНЕРИ ══════════ */
+function openUser(id) {
+  const u = id ? users.find(x => x.id === id) : null;
+  modal(`<h2><i class="ti ti-${u ? 'user-cog' : 'user-plus'}"></i> ${u ? t('partnerCard') : t('newPartner')}</h2>
+    <div class="row">
+      <div class="field"><label>${t('company')}</label><input id="u-company" value="${u ? esc(u.company || '') : ''}" placeholder="Duckwoodworks"></div>
+      <div class="field"><label>${t('contact')} *</label><input id="u-name" value="${u ? esc(u.name) : ''}" placeholder="John"></div>
+    </div>
+    <div class="field"><label>${t('logoLabel')}</label>
+      <div class="logo-pick">
+        <img id="u-logo-prev" class="plogo lg" src="${u && u.logo ? u.logo : ''}" alt="">
+        <div>
+          <button class="btn sm" onclick="document.getElementById('u-logo-file').click()"><i class="ti ti-upload"></i> ${t('choose')}</button>
+          <button class="btn sm" onclick="clearLogo()"><i class="ti ti-x"></i></button>
+          <div class="hint">${t('logoHint')}</div>
+        </div>
+      </div>
+      <input type="hidden" id="u-logo" value="${u && u.logo ? u.logo : ''}">
+      <input type="file" id="u-logo-file" accept="image/png,image/jpeg,image/webp" style="display:none" onchange="pickLogo(this)">
+    </div>
+    <div class="field"><label>${t('login')} *</label><input id="u-login" class="mono" value="${u ? esc(u.login) : ''}" placeholder="duck"></div>
+    <div class="row">
+      <div class="field"><label>${t('interfaceLang')}</label><select id="u-lang">
+        <option value="uk" ${!u || u.lang !== 'en' ? 'selected' : ''}>Українська</option>
+        <option value="en" ${u && u.lang === 'en' ? 'selected' : ''}>English</option>
+      </select></div>
+      <div class="field"><label>${t('currency')}</label><select id="u-cur">${curOpts(u ? u.currency : 'USD')}</select></div>
+    </div>
+    <div class="field"><label>${t('emailLbl')}</label>
+      <input id="u-email" type="email" value="${u ? esc(u.email || '') : ''}" placeholder="partner@mail.com">
+      <div style="font-size:11px;color:var(--text3);margin-top:4px;">${t('emailHint')}</div>
+    </div>
+    <div class="field"><label>${t('tgBots')}</label>
+      <div id="u-bots"></div>
+      <button class="btn sm" onclick="addBotRow()"><i class="ti ti-plus"></i> ${t('addBotRow')}</button>
+      <div style="font-size:11px;color:var(--text3);margin-top:6px;">${t('tgTokenHint')}</div>
+      <div id="mirror-box" class="${u && u.admin ? '' : 'hide'}">
+        <label class="greq" style="margin-top:9px;">
+          <input type="checkbox" id="u-mirror" ${u && u.tgMirror ? 'checked' : ''}> ${t('tgMirror')}</label>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px;">${t('tgMirrorHint')}</div>
+      </div>
+    </div>
+    <div class="field"><label>${u ? t('newPassOpt') : t('passReq') + ' *'}</label>
+      <input id="u-pass" type="password" placeholder="${t('passPh')}"></div>
+    <div class="checks"><label><input type="checkbox" id="u-admin" ${u && u.admin ? 'checked' : ''} onchange="toggle('mirror-box', this.checked)"> ${t('isAdmin')}</label></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal()">${t('cancel')}</button>
+      <button class="btn primary" id="save-btn" onclick="saveUser(${u ? `'${u.id}'` : 'null'})">${t('save')}</button></div>`);
+
+  const bots = (u && u.tgBots && u.tgBots.length) ? u.tgBots
+             : (u && u.tgChatId ? [{ chat: u.tgChatId, token: u.tgToken || '' }] : []);
+  bots.forEach(addBotRow);
+  if (!bots.length) addBotRow();
+}
+
+function addBotRow(b) {
+  b = b || { chat: '', token: '' };
+  const d = document.createElement('div');
+  d.className = 'ochoice';
+  d.innerHTML = `
+    <input class="tb-chat mono" style="width:140px;" placeholder="${t('tgChat')}" value="${esc(b.chat || '')}">
+    <input class="tb-token mono" style="flex:1;min-width:180px;" placeholder="${t('tgTokenPh')}" value="${esc(b.token || '')}">
+    <button class="btn xs" onclick="findChat(this)" title="${t('findChat')}"><i class="ti ti-search"></i> ID</button>
+    <button class="icon-btn" onclick="this.closest('.ochoice').remove()"><i class="ti ti-x"></i></button>`;
+  $('u-bots').appendChild(d);
+}
+
+// Запитує в Telegram, хто писав цьому боту, і підставляє chat id.
+// Список показуємо прямо в рядку, щоб не закривати картку партнера.
+async function findChat(btn) {
+  const row = btn.closest('.ochoice');
+  const token = row.querySelector('.tb-token').value.trim();
+  if (!token) { toast(t('needToken'), 'error'); return; }
+  const old = row.querySelector('.chatpick');
+  if (old) old.remove();
+  btn.disabled = true;
+  const res = await api('tgChats', { botToken: token });
+  btn.disabled = false;
+  if (!res || res.error) { toast(errMsg(res && res.error), 'error'); return; }
+  if (!res.chats.length) { toast(t('noChats', { b: res.bot }), 'error'); return; }
+
+  const box = document.createElement('div');
+  box.className = 'chatpick';
+  box.innerHTML = `<div class="cp-head">${esc(res.bot)} · ${t('pickChat')}</div>` +
+    res.chats.map(c => `<div class="cp-row" onclick="useChat(this,'${esc(c.id)}')">
+      <span>${esc(c.name || '—')}</span><span class="mono">${esc(c.id)}</span></div>`).join('');
+  row.appendChild(box);
+}
+
+function useChat(el, id) {
+  const row = el.closest('.ochoice');
+  row.querySelector('.tb-chat').value = id;
+  const box = row.querySelector('.chatpick');
+  if (box) box.remove();
+}
+
+function collectBots() {
+  return [...document.querySelectorAll('#u-bots .ochoice')].map(r => ({
+    chat: r.querySelector('.tb-chat').value.trim(),
+    token: r.querySelector('.tb-token').value.trim()
+  })).filter(b => b.chat || b.token);   // для «дзеркала» достатньо самого chat id
+}
+
+function pickLogo(input) {
+  const f = input.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const S = 96, c = document.createElement('canvas');
+      c.width = c.height = S;
+      const ctx = c.getContext('2d');
+      const side = Math.min(img.width, img.height);
+      ctx.drawImage(img, (img.width - side) / 2, (img.height - side) / 2, side, side, 0, 0, S, S);
+      const data = c.toDataURL('image/png');
+      if (data.length > 47000) { toast(t('logoTooBig'), 'error'); return; }
+      $('u-logo').value = data;
+      $('u-logo-prev').src = data;
+    };
+    img.onerror = () => toast(t('logoBadRead'), 'error');
+    img.src = r.result;
+  };
+  r.readAsDataURL(f);
+}
+
+function clearLogo() { $('u-logo').value = ''; $('u-logo-prev').removeAttribute('src'); }
+
+async function saveUser(id) {
+  const data = { name: val('u-name').trim(), company: val('u-company').trim(), logo: val('u-logo'),
+                 lang: val('u-lang'), currency: val('u-cur'),
+                 tgBots: collectBots(), tgMirror: $('u-mirror').checked, email: val('u-email').trim(),
+                 admin: $('u-admin').checked };
+  const pass = val('u-pass');
+  if (!data.name) { toast(t('needName'), 'error'); return; }
+  busy('save-btn');
+  let res;
+  if (id) {
+    data.login = val('u-login').trim();
+    if (pass) data.password = pass;
+    res = await api('updateUser', Object.assign({ id }, data));
+  } else {
+    data.login = val('u-login').trim();
+    data.password = pass;
+    res = await api('addUser', data);
+  }
+  if (res && !res.error) { toast(t('saved')); closeModal(); loadUsers(); loadAll(); }
+  else { toast(errMsg(res && res.error), 'error'); unbusy('save-btn', t('save')); }
+}
+
+async function toggleUser(id, active) {
+  const res = await api('updateUser', { id, active });
+  if (res && !res.error) { toast(active ? t('partnerOn') : t('partnerOff')); loadUsers(); loadAll(); }
+  else toast(errMsg(res && res.error), 'error');
+}
+
+function delUser(id, name) {
+  modal(`<h2>${t('deletePartnerQ')}</h2>
+    <p style="font-size:14px;color:var(--text2);margin-bottom:1.5rem;">${t('partnerGone', { n: esc(name) })}</p>
+    <div class="modal-footer"><button class="btn" onclick="closeModal()">${t('cancel')}</button>
+      <button class="btn danger" id="save-btn" onclick="doDelUser('${id}')"><i class="ti ti-trash"></i> ${t('delete')}</button></div>`);
+}
+async function doDelUser(id) {
+  busy('save-btn');
+  const res = await api('deleteUser', { id });
+  if (res && !res.error) { toast(t('deleted')); closeModal(); loadUsers(); loadAll(); }
+  else { toast(errMsg(res && res.error), 'error'); unbusy('save-btn', t('delete')); }
+}
+
+/* ══════════ ПРОФІЛЬ ══════════ */
+function openProfile() {
+  modal(`<h2><i class="ti ti-user-cog"></i> ${t('myProfile')}</h2>
+    <div class="field"><label>${t('displayName')}</label><input id="pr-name" value="${esc(ME.name)}"></div>
+    <button class="btn sm" onclick="saveName()">${t('saveName')}</button>
+    <div class="field" style="margin-top:1rem;"><label>${t('interfaceLang')}</label>
+      <select id="pr-lang" onchange="setLangRemote(this.value)">
+        <option value="uk" ${LANG === 'uk' ? 'selected' : ''}>Українська</option>
+        <option value="en" ${LANG === 'en' ? 'selected' : ''}>English</option>
+      </select></div>
+    <div class="field"><label>${t('currency')}</label>
+      <select id="pr-cur" onchange="setCurRemote(this.value)">${curOpts(myCur())}</select>
+      <div style="font-size:11px;color:var(--text3);margin-top:5px;">${t('currencyHint')}</div></div>
+    <div class="sect">${t('changePass')}</div>
+    <div class="field"><label>${t('currentPass')}</label><input id="pr-old" type="password"></div>
+    <div class="field"><label>${t('newPass')}</label><input id="pr-new" type="password" placeholder="${t('passPh')}"></div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal()">${t('close')}</button>
+      <button class="btn primary" id="save-btn" onclick="savePass()">${t('doChangePass')}</button></div>`);
+}
+async function setCurRemote(c) {
+  const res = await api('setCurrency', { currency: c });
+  if (res && res.user) { ME = res.user; toast(t('saved')); renderOrders(); renderProducts(); }
+  else toast(errMsg(res && res.error), 'error');
+}
+
+async function saveName() {
+  const res = await api('updateMyName', { name: val('pr-name').trim() });
+  if (res && !res.error) { ME = res.user; $('me-name').textContent = ME.company || ME.name; toast(t('nameSaved')); }
+  else toast(errMsg(res && res.error), 'error');
+}
+async function savePass() {
+  busy('save-btn');
+  const res = await api('changePassword', { oldPassword: val('pr-old'), newPassword: val('pr-new') });
+  if (res && !res.error) { toast(t('passChanged')); closeModal(); }
+  else { toast(errMsg(res && res.error), 'error'); unbusy('save-btn', t('doChangePass')); }
+}
+
+/* ══════════ ДРІБНИЦІ ══════════ */
+function $(id) { return document.getElementById(id); }
+function val(id) { const e = $(id); return e ? e.value : ''; }
+function toggle(id, show) { const e = $(id); if (e) e.classList.toggle('hide', !show); }
+function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function modal(html) { $('modal-box').innerHTML = html; $('modal-bg').classList.add('open'); }
+function closeModal() { $('modal-bg').classList.remove('open'); }
+$('modal-bg').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+
+function busy(id) { const b = $(id); if (b) { b.disabled = true; b.innerHTML = '<span class="spinner"></span>'; } }
+function unbusy(id, txt) { const b = $(id); if (b) { b.disabled = false; b.textContent = txt; } }
+
+function sync(on) {
+  $('sync-status').innerHTML = on
+    ? `<span class="spinner"></span> ${t('loading')}`
+    : `<i class="ti ti-cloud-check" style="color:#3B6D11"></i> ${t('syncOk')}`;
+}
+
+function toast(msg, type) {
+  const el = document.createElement('div');
+  el.className = 'toast ' + (type || 'success');
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 3200);
+}
+
+function flag(c) {
+  const code = COUNTRIES[c] ? (c === 'other' ? '••' : String(c).toUpperCase()) : '••';
+  return '<span class="cc">' + code + '</span>';
+}
+function cname(c) { return COUNTRIES[c] ? COUNTRIES[c][LANG === 'en' ? 2 : 1] : (c || ''); }
+function countryOpts(sel) {
+  return Object.keys(COUNTRIES).map(c =>
+    `<option value="${c}" ${c === (sel || 'US') ? 'selected' : ''}>${cname(c)}</option>`).join('');
+}
+
+function parseDate(v) {
+  if (!v) return null;
+  const s = String(v).trim();
+  let m = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (m) return new Date(+m[1], +m[2] - 1, +m[3]);
+  m = s.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})/);
+  if (m) return new Date(+m[3], +m[2] - 1, +m[1]);
+  const d = new Date(s);
+  return isNaN(d) ? null : d;
+}
+function ts(v) { const d = parseDate(v); return d ? d.getTime() : 0; }
+function monthKey(o) {
+  const d = parseDate(o.created);
+  return d ? d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') : '';
+}
+function fmtDate(v) {
+  const d = parseDate(v);
+  if (!d) return '—';
+  const dd = String(d.getDate()).padStart(2, '0'), mm = String(d.getMonth() + 1).padStart(2, '0');
+  return LANG === 'en' ? `${mm}/${dd}/${d.getFullYear()}` : `${dd}.${mm}.${d.getFullYear()}`;
+}
+function fmtDateTime(v) {
+  const d = parseDate(v);
+  return d ? d.toLocaleString(L().locale) : '—';
+}
+
+function toB64(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
+/* ══════════ СТАРТ ══════════ */
+boot();
+setInterval(() => { if (TOKEN && ME) loadAll(); }, 60000);
+</script>
+</body>
+</html>
