@@ -46,7 +46,7 @@
      Міняти тут треба лише тоді, коли ви створили НОВЕ розгортання.
      Звичайне оновлення («Нова версія») адресу не змінює.          -->
 <script>
-  var CRM_URL = "https://script.google.com/macros/s/AKfycbxm-gH_LH8ZxEE9fjfqsiE52_qKq1RZIYTzMBohSWkYu-cPbZqmRV_7n7Z2YM3zipwHrQ/exec";
+  var CRM_URL = "https://script.google.com/macros/s/AKfycby8vrScTJlZG3fyDMbKcORx7ha1SHkP3iSQ_CpYWioPE5nsjqaog9NB8PMh_LG0gtVt9w/exec";
 </script>
 
 <div id="boot">
@@ -67,6 +67,11 @@
   setTimeout(function () { boot.classList.add('slow'); }, 9000);
 
   app.src = CRM_URL;
+
+  // CRM просить перезавантажитись (вийшла нова версія)
+  window.addEventListener('message', function (e) {
+    if (e.data === 'partners-reload') location.reload();
+  });
 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
